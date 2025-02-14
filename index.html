@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="keywords" content="WEDDING, PLANNER, PLAN, ASSIGNMENT">
+    <meta name="keywords" content="WEDDING,PLANNER,PLAN,ASSIGNMENT,">
     <meta name="author" content="Elite Events Chicago">
     <title>Gold Coast Chauffeurs</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -11,68 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="stylistic.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <style>
-        /* Info Section Styling */
-        .info-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 20px; /* Space between images */
-            padding: 50px 20px;
-            background-color: #f4f4f4; /* Fallback background */
-        }
-
-        .info-image {
-            flex: 1;
-            min-width: 300px; /* Minimum width for responsiveness */
-            max-width: 45%; /* Ensure two images fit side by side */
-            height: 400px; /* Fixed height */
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px; /* Slightly rounded edges */
-            overflow: hidden; /* Ensure no sharp edges */
-        }
-
-        .info-image.left {
-            background-image: url("images/work_1.jpeg"); /* First image */
-        }
-
-        .info-image.right {
-            background-image: url("images/work_2.jpeg"); /* Second image */
-        }
-
-        .info-content {
-            flex: 1;
-            min-width: 300px;
-            max-width: 45%;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .info-content h2 {
-            font-size: 36px;
-            font-family: 'Lobster', cursive;
-            margin-bottom: 20px;
-        }
-
-        .info-content p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        /* Responsive Adjustments */
-        @media screen and (max-width: 768px) {
-            .info-image {
-                max-width: 100%; /* Stack images vertically on small screens */
-                height: 300px; /* Adjust height for smaller screens */
-            }
-
-            .info-content {
-                max-width: 100%; /* Full width for text on small screens */
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Middle Banner with Purple Background -->
@@ -105,7 +43,6 @@
             <!-- Main Navigation Links (Visible on larger screens) -->
             <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-info-circle"></i> About</a>
             <a href="#work" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-th"></i> Cars</a>
-            <a href="#info" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-info-circle"></i> Info</a> <!-- New Info Button -->
             <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-envelope"></i> Contact</a>
         </div>
 
@@ -113,7 +50,6 @@
         <div id="navSmall" class="w3-bar-block w3-cream w3-hide w3-hide-large w3-hide-medium">
             <a href="#about" class="w3-bar-item w3-button">About</a>
             <a href="#work" class="w3-bar-item w3-button">Cars</a>
-            <a href="#info" class="w3-bar-item w3-button">Info</a> <!-- New Info Button -->
             <a href="#contact" class="w3-bar-item w3-button">Contact</a>
         </div>
     </div>
@@ -129,22 +65,18 @@
     <div class="w3-content w3-container w3-padding-64" id="about">
         <h3 class="w3-center font-courgette">Luxury Car Renting Service</h3>
         <p class="w3-center"><em>ABOUT US</em></p>
-        <p>Welcome to Gold Coast Chauffeurs.</p>
-    </div>
-
-    <!-- Info Section -->
-    <div class="info-section" id="info">
-        <div class="info-image left"></div>
-        <div class="info-content">
-            <h2>Why Choose Us?</h2>
-            <p>At Gold Coast Chauffeurs, we provide top-notch luxury car rental services. Our fleet includes the finest vehicles, and our professional drivers ensure a safe and comfortable ride. Whether it's a special occasion or a business trip, we've got you covered.</p>
-        </div>
-        <div class="info-image right"></div>
+        <p>Welcome to Gold Coast Chauffeurs. We are the luxury car rental service of choice for clients who want a genuinely bespoke experience, delivered flawlessly. Our world-class service and dedication to excellence are what set us apart.</p>
     </div>
 
     <!-- Our Cars Section -->
+    <div class="bgimg-2 w3-display-container w3-opacity-min">
+        <div class="w3-display-middle">
+            <span class="w3-xxlarge w3-text-white w3-wide">Our Cars</span>
+        </div>
+    </div>
     <div class="w3-content w3-container w3-padding-64" id="work">
         <h3 class="w3-center">OUR CARS</h3>
+        <p class="w3-center"><em>RECENT PROJECTS</em></p>
         <div class="w3-row-padding w3-center">
             <div class="w3-col m4">
                 <img src="images/work_1.jpeg" class="w3-round w3-image w3-opacity w3-hover-opacity-off" onclick="openModal(this);" alt="Work 1" width="600" height="400">
