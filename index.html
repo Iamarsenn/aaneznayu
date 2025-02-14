@@ -14,31 +14,40 @@
     <style>
         /* Info Section Styling */
         .info-section {
-            position: relative;
-            background: url("images/work_1.jpeg") center/cover no-repeat;
-            min-height: 400px;
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
-            text-align: center;
-            color: white;
+            align-items: center;
+            gap: 20px; /* Space between images */
+            padding: 50px 20px;
+            background-color: #f4f4f4; /* Fallback background */
         }
 
-        .info-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+        .info-image {
+            flex: 1;
+            min-width: 300px; /* Minimum width for responsiveness */
+            max-width: 45%; /* Ensure two images fit side by side */
+            height: 400px; /* Fixed height */
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px; /* Slightly rounded edges */
+            overflow: hidden; /* Ensure no sharp edges */
+        }
+
+        .info-image.left {
+            background-image: url("images/work_1.jpeg"); /* First image */
+        }
+
+        .info-image.right {
+            background-image: url("images/work_2.jpeg"); /* Second image */
         }
 
         .info-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
+            flex: 1;
+            min-width: 300px;
+            max-width: 45%;
             padding: 20px;
+            text-align: center;
         }
 
         .info-content h2 {
@@ -50,6 +59,18 @@
         .info-content p {
             font-size: 18px;
             line-height: 1.6;
+        }
+
+        /* Responsive Adjustments */
+        @media screen and (max-width: 768px) {
+            .info-image {
+                max-width: 100%; /* Stack images vertically on small screens */
+                height: 300px; /* Adjust height for smaller screens */
+            }
+
+            .info-content {
+                max-width: 100%; /* Full width for text on small screens */
+            }
         }
     </style>
 </head>
@@ -113,10 +134,12 @@
 
     <!-- Info Section -->
     <div class="info-section" id="info">
+        <div class="info-image left"></div>
         <div class="info-content">
             <h2>Why Choose Us?</h2>
             <p>At Gold Coast Chauffeurs, we provide top-notch luxury car rental services. Our fleet includes the finest vehicles, and our professional drivers ensure a safe and comfortable ride. Whether it's a special occasion or a business trip, we've got you covered.</p>
         </div>
+        <div class="info-image right"></div>
     </div>
 
     <!-- Our Cars Section -->
