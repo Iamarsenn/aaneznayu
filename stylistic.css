@@ -48,13 +48,12 @@
 
     /* Specific Background Images */
     .bgimg-1 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 400px; }
-    .bgimg-2 { background-image: url("images/work_1.jpeg"); min-height: 400px; }
-    .bgimg-3 { background-image: url("images/work_1.jpeg"); min-height: 400px; }
-    .bgimg-4 { background-image: url("images/work_1.jpeg"); min-height: 100%; }
-    .bgimg-5 { background-image: url("images/work_1.jpeg"); min-height: 100%; }
-    .bgimg-6 { background-image: url("images/work_1.jpeg"); min-height: 100%; }
-    .bgimg-7 { background-image: url("images/work_1.jpeg"); min-height: 100%; }
-    .bgimg-8 { background-image: url("images/work_1.jpeg"); min-height: 100%; }
+    .bgimg-2 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 400px; }
+    .bgimg-3 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 100%; }
+    .bgimg-4 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 100%; }
+    .bgimg-5 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 100%; }
+    .bgimg-6 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 100%; }
+    .bgimg-7 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 100%; }
 
     /* Contact Form Styling */
     .contact-form {
