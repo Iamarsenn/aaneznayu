@@ -11,68 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="stylistic.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <style>
-        /* About Section Styling */
-        .about-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 20px; /* Space between images and text */
-            padding: 50px 20px;
-            background-color: #f4f4f4; /* Fallback background */
-        }
-
-        .about-image {
-            flex: 1;
-            min-width: 300px; /* Minimum width for responsiveness */
-            max-width: 45%; /* Ensure two images fit side by side */
-            height: 400px; /* Fixed height */
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px; /* Slightly rounded edges */
-            overflow: hidden; /* Ensure no sharp edges */
-        }
-
-        .about-image.left {
-            background-image: url("images/about_1.jpg"); /* First image */
-        }
-
-        .about-image.right {
-            background-image: url("images/about_2.jpg"); /* Second image */
-        }
-
-        .about-content {
-            flex: 1;
-            min-width: 300px;
-            max-width: 45%;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .about-content h2 {
-            font-size: 36px;
-            font-family: 'Lobster', cursive;
-            margin-bottom: 20px;
-        }
-
-        .about-content p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        /* Responsive Adjustments */
-        @media screen and (max-width: 768px) {
-            .about-image {
-                max-width: 100%; /* Stack images vertically on small screens */
-                height: 300px; /* Adjust height for smaller screens */
-            }
-
-            .about-content {
-                max-width: 100%; /* Full width for text on small screens */
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Middle Banner with Purple Background -->
@@ -124,16 +62,18 @@
     </div>
 
     <!-- About Section -->
-    <div class="about-section" id="about">
-        <div class="about-image left"></div>
-        <div class="about-content">
-            <h2>Why Choose Us?</h2>
-            <p>At Gold Coast Chauffeurs, we provide top-notch luxury car rental services. Our fleet includes the finest vehicles, and our professional drivers ensure a safe and comfortable ride. Whether it's a special occasion or a business trip, we've got you covered.</p>
-        </div>
-        <div class="about-image right"></div>
+    <div class="w3-content w3-container w3-padding-64" id="about">
+        <h3 class="w3-center font-courgette">Luxury Car Renting Service</h3>
+        <p class="w3-center"><em>ABOUT US</em></p>
+        <p>Welcome to Gold Coast Chauffeurs. We are the luxury car rental service of choice for clients who want a genuinely bespoke experience, delivered flawlessly. Our world-class service and dedication to excellence are what set us apart.</p>
     </div>
 
     <!-- Our Cars Section -->
+    <div class="bgimg-2 w3-display-container w3-opacity-min">
+        <div class="w3-display-middle">
+            <span class="w3-xxlarge w3-text-white w3-wide">Our Cars</span>
+        </div>
+    </div>
     <div class="w3-content w3-container w3-padding-64" id="work">
         <h3 class="w3-center">OUR CARS</h3>
         <p class="w3-center"><em>RECENT PROJECTS</em></p>
