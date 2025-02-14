@@ -12,113 +12,65 @@
     <link rel="stylesheet" type="text/css" href="stylistic.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <style>
-        /* Proposal Banner Styling */
-        .proposal-banner {
-            width: 100%;
+        /* About Section Styling */
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Space between images and text */
             padding: 50px 20px;
+            background-color: #f4f4f4; /* Fallback background */
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px; /* Minimum width for responsiveness */
+            max-width: 45%; /* Ensure two images fit side by side */
+            height: 400px; /* Fixed height */
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px; /* Slightly rounded edges */
+            overflow: hidden; /* Ensure no sharp edges */
+        }
+
+        .about-image.left {
+            background-image: url("images/about_1.jpg"); /* First image */
+        }
+
+        .about-image.right {
+            background-image: url("images/about_2.jpg"); /* Second image */
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 45%;
+            padding: 20px;
             text-align: center;
-            background: url("images/banner.jpg") center/cover no-repeat, #800080; /* Fallback color */
-            color: white;
+        }
+
+        .about-content h2 {
             font-size: 36px;
             font-family: 'Lobster', cursive;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 20px;
         }
 
-        .proposal-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
-            z-index: -1;
+        .about-content p {
+            font-size: 18px;
+            line-height: 1.6;
         }
 
-        /* Hero Section Styling */
-        .bgimg-1 {
-            background: url("images/hero.jpg") center/cover no-repeat, #f4f4f4; /* Fallback color */
-            min-height: 400px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-        }
+        /* Responsive Adjustments */
+        @media screen and (max-width: 768px) {
+            .about-image {
+                max-width: 100%; /* Stack images vertically on small screens */
+                height: 300px; /* Adjust height for smaller screens */
+            }
 
-        .bgimg-1::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-        }
-
-        /* Our Cars Section Styling */
-        .bgimg-2 {
-            background: url("images/cars.jpg") center/cover no-repeat, #f4f4f4; /* Fallback color */
-            min-height: 400px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-        }
-
-        .bgimg-2::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-        }
-
-        /* Image Gallery Styling */
-        .w3-row-padding.w3-center img {
-            width: 100%;
-            max-width: 600px;
-            height: auto;
-            margin: 10px 0;
-            border-radius: 10px;
-        }
-
-        /* Contact Form Styling */
-        .contact-form-container {
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-form input,
-        .contact-form textarea,
-        .contact-form select,
-        .contact-form button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .contact-form button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .contact-form button:hover {
-            background-color: #45a049;
+            .about-content {
+                max-width: 100%; /* Full width for text on small screens */
+            }
         }
     </style>
 </head>
@@ -172,18 +124,16 @@
     </div>
 
     <!-- About Section -->
-    <div class="w3-content w3-container w3-padding-64" id="about">
-        <h3 class="w3-center font-courgette">Luxury Car Renting Service</h3>
-        <p class="w3-center"><em>ABOUT US</em></p>
-        <p>Welcome to Gold Coast Chauffeurs. We are the luxury car rental service of choice for clients who want a genuinely bespoke experience, delivered flawlessly. Our world-class service and dedication to excellence are what set us apart.</p>
+    <div class="about-section" id="about">
+        <div class="about-image left"></div>
+        <div class="about-content">
+            <h2>Why Choose Us?</h2>
+            <p>At Gold Coast Chauffeurs, we provide top-notch luxury car rental services. Our fleet includes the finest vehicles, and our professional drivers ensure a safe and comfortable ride. Whether it's a special occasion or a business trip, we've got you covered.</p>
+        </div>
+        <div class="about-image right"></div>
     </div>
 
     <!-- Our Cars Section -->
-    <div class="bgimg-2 w3-display-container w3-opacity-min">
-        <div class="w3-display-middle">
-            <span class="w3-xxlarge w3-text-white w3-wide">Our Cars</span>
-        </div>
-    </div>
     <div class="w3-content w3-container w3-padding-64" id="work">
         <h3 class="w3-center">OUR CARS</h3>
         <p class="w3-center"><em>RECENT PROJECTS</em></p>
