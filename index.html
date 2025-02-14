@@ -12,20 +12,45 @@
     <link rel="stylesheet" type="text/css" href="stylistic.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <style>
-        /* Add fallback background colors */
-        .proposal-banner {
-            background: url("img/celebration_couple.jpg") center/cover no-repeat, #800080; /* Fallback color */
+        /* Info Section Styling */
+        .info-section {
+            position: relative;
+            background: url("images/work_1.jpeg") center/cover no-repeat;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
         }
 
-        .bgimg-1 { background-image: url("images/work_2.jpeg"), #f4f4f4; }
-        .bgimg-2 { background-image: url("images/work_1.jpeg"), #f4f4f4; }
-        .bgimg-3 { background-image: url("images/work_2.jpeg"), #f4f4f4; }
-        .bgimg-4 { background-image: url("images/work_2.jpeg"), #f4f4f4; }
-        .bgimg-5 { background-image: url("images/work_2.jpeg"), #f4f4f4; }
-        .bgimg-6 { background-image: url("images/work_2.jpeg"), #f4f4f4; }
-        .bgimg-7 { background-image: url("images/work_2.jpeg"), #f4f4f4; }
-        .bgimg-8 { background-image: url("images/work_2.jpeg"), #f4f4f4; }
-        .bgimg-9 { background-image: url("images/work_2.jpeg"), #f4f4f4; }
+        .info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+        }
+
+        .info-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .info-content h2 {
+            font-size: 36px;
+            font-family: 'Lobster', cursive;
+            margin-bottom: 20px;
+        }
+
+        .info-content p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -59,6 +84,7 @@
             <!-- Main Navigation Links (Visible on larger screens) -->
             <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-info-circle"></i> About</a>
             <a href="#work" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-th"></i> Cars</a>
+            <a href="#info" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-info-circle"></i> Info</a> <!-- New Info Button -->
             <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white"><i class="fa fa-envelope"></i> Contact</a>
         </div>
 
@@ -66,6 +92,7 @@
         <div id="navSmall" class="w3-bar-block w3-cream w3-hide w3-hide-large w3-hide-medium">
             <a href="#about" class="w3-bar-item w3-button">About</a>
             <a href="#work" class="w3-bar-item w3-button">Cars</a>
+            <a href="#info" class="w3-bar-item w3-button">Info</a> <!-- New Info Button -->
             <a href="#contact" class="w3-bar-item w3-button">Contact</a>
         </div>
     </div>
@@ -82,6 +109,14 @@
         <h3 class="w3-center font-courgette">Luxury Car Renting Service</h3>
         <p class="w3-center"><em>ABOUT US</em></p>
         <p>Welcome to Gold Coast Chauffeurs.</p>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section" id="info">
+        <div class="info-content">
+            <h2>Why Choose Us?</h2>
+            <p>At Gold Coast Chauffeurs, we provide top-notch luxury car rental services. Our fleet includes the finest vehicles, and our professional drivers ensure a safe and comfortable ride. Whether it's a special occasion or a business trip, we've got you covered.</p>
+        </div>
     </div>
 
     <!-- Our Cars Section -->
