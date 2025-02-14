@@ -47,15 +47,15 @@
     }
 
     /* Specific Background Images */
-    .bgimg-1 { background-image: url("img/KKwalk.jpg"); min-height: 100%; }
-    .bgimg-2 { background-image: url("img/celebration_couple.jpg"); min-height: 400px; }
-    .bgimg-3 { background-image: url("img/bg_beach.jpg"); min-height: 400px; }
-    .bgimg-4 { background-image: url("img/bg_beach.jpg"); min-height: 400px; }
-    .bgimg-5 { background-image: url("img/mersey1.jpg"); min-height: 100%; }
-    .bgimg-6 { background-image: url("img/cheshire.jpg"); min-height: 100%; }
-    .bgimg-7 { background-image: url("img/north_wales.jpg"); min-height: 100%; }
-    .bgimg-8 { background-image: url("img/KKHeader2.jpg"); min-height: 100%; }
-    .bgimg-9 { background-image: url("img/mrmrs.jpg"); min-height: 100%; }
+    .bgimg-1 { background-image: url("images/work_2.jpeg"); min-height: 100%; }
+    .bgimg-2 { background-image: url("images/work_1.jpeg"); min-height: 400px; }
+    .bgimg-3 { background-image: url("images/work_2.jpeg"); min-height: 400px; }
+    .bgimg-4 { background-image: url("images/work_2.jpeg"); min-height: 400px; }
+    .bgimg-5 { background-image: url("images/work_2.jpeg"); min-height: 100%; }
+    .bgimg-6 { background-image: url("images/work_2.jpeg"); min-height: 100%; }
+    .bgimg-7 { background-image: url("images/work_2.jpeg"); min-height: 100%; }
+    .bgimg-8 { background-image: url("images/work_2.jpeg"); min-height: 100%; }
+    .bgimg-9 { background-image: url("images/work_2.jpeg"); min-height: 100%; }
 
     /* Contact Form Styling */
     .contact-form {
