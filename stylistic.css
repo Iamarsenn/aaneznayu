@@ -39,7 +39,7 @@
     }
 
     /* Parallax Background Images */
-    .bgimg-1, .bgimg-2, .bgimg-3, .bgimg-4, .bgimg-5, .bgimg-6, .bgimg-7, .bgimg-8, .bgimg-9 {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
         background-attachment: fixed;
         background-position: center;
         background-repeat: no-repeat;
@@ -49,6 +49,8 @@
     /* Specific Background Images */
     .bgimg-1 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 400px; }
     .bgimg-2 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 400px; }
+    .bgimg-2 { background-image: url("images/franco-debartolo-SC5dsOBDE5A-unsplash.jpg"); min-height: 400px; }
+
 
     /* Contact Form Styling */
     .contact-form {
