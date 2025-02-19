@@ -52,41 +52,60 @@
     .bgimg-2 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 400px; }
 
 
-    /* Contact Form Styling */
-    .contact-form {
-        max-width: 600px;
-        width: 100%;
-        padding: 20px;
-        margin-bottom: 30px; /* Space beneath the form for other content */
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+/* Contact Form Styling */
+.contact-form {
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 30px; /* Space beneath the form for other content */
+    background-color: rgba(255, 255, 255, 0.9); /* White background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333; /* Dark text color for the form */
+}
 
-    /* Form Element Styling */
-    .contact-form input[type="text"],
-    .contact-form input[type="email"],
-    .contact-form input[type="date"],
-    .contact-form textarea,
-    .contact-form button {
-        width: 100%;
-        padding: 12px;
-        margin-top: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 16px;
-    }
+/* Form Element Styling */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="date"],
+.contact-form textarea,
+.contact-form select,
+.contact-form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333; /* Dark text color for inputs */
+    background-color: #fff; /* White background for inputs */
+}
 
-    .contact-form button {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+.contact-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-    .contact-form button:hover {
-        background-color: #45a049;
+.contact-form button:hover {
+    background-color: #45a049;
+}
+
+/* Label Styling */
+.contact-form label {
+    color: #333; /* Dark text color for labels */
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Placeholder Styling */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #999; /* Light gray placeholder text */
+}
     }
 
     /* Form labels */
