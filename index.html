@@ -179,41 +179,39 @@ body {
     </style>
 </head>
 <body>
-    <div class="w3-row">
-        <div class="w3-col contact-form-container" style="flex: 1; max-width: 48%;">
-            <form action="https://formspree.io/f/xdkogden" method="POST" class="contact-form">
-                <!-- Name Field -->
-                <div class="form-field">
-                    <label for="name">Name</label>
-                    <input id="name" type="text" name="name" placeholder="Enter your name" required>
-                </div>
-
-                <!-- Location Field -->
-                <div class="form-field">
-                    <label for="location">Your Location</label>
-                    <input id="location" type="text" name="location" placeholder="Write your address" required>
-                </div>
-
-                <!-- Destination Field -->
-                <div class="form-field">
-                    <label for="destination">Destination</label>
-                    <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
-                </div>
-
-                <!-- Pickup Time Field -->
-                <div class="form-field">
-                    <label for="pickup-time">Pickup Time</label>
-                    <select id="pickup-time" name="pickup-time" required>
-                        <option value="" disabled selected>Select a time</option>
-                        <!-- Time options will be dynamically inserted here -->
-                    </select>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit">Send Message</button>
-            </form>
+    <div class="contact-form">
+    <form action="https://formspree.io/f/xdkogden" method="POST">
+        <!-- Name Field -->
+        <div class="form-field">
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" placeholder="Enter your name" required>
         </div>
-    </div>
+
+        <!-- Location Field -->
+        <div class="form-field">
+            <label for="location">Your Location</label>
+            <input id="location" type="text" name="location" placeholder="Write your address" required>
+        </div>
+
+        <!-- Destination Field -->
+        <div class="form-field">
+            <label for="destination">Destination</label>
+            <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
+        </div>
+
+        <!-- Pickup Time Field -->
+        <div class="form-field">
+            <label for="pickup-time">Pickup Time</label>
+            <select id="pickup-time" name="pickup-time" required>
+                <option value="" disabled selected>Select a time</option>
+                <!-- Time options will be dynamically inserted here -->
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Send Message</button>
+    </form>
+</div>
 
     <!-- JavaScript to Generate Time Options -->
     <script>
