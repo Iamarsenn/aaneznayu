@@ -58,10 +58,10 @@
     width: 100%;
     padding: 20px;
     margin-bottom: 30px; /* Space beneath the form for other content */
-    background-color: rgba(255, 255, 255, 0.9); /* White background */
+    background-color: #000; /* Total black background */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    color: #333; /* Dark text color for the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow */
+    color: #fff; /* White text for the form */
 }
 
 /* Form Element Styling */
@@ -74,15 +74,15 @@
     width: 100%;
     padding: 12px;
     margin-top: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #444; /* Darker border */
     border-radius: 5px;
     font-size: 16px;
-    color: #333; /* Dark text color for inputs */
-    background-color: #fff; /* White background for inputs */
+    color: #fff; /* White text for inputs */
+    background-color: #333; /* Dark gray background for inputs */
 }
 
 .contact-form button {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* red button */
     color: white;
     border: none;
     cursor: pointer;
@@ -90,7 +90,21 @@
 }
 
 .contact-form button:hover {
-    background-color: #45a049;
+    background-color: #8B0000; /* Darker green on hover */
+}
+
+/* Label Styling */
+.contact-form label {
+    color: #fff; /* White text for labels */
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Placeholder Styling */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #bbb; /* Light gray placeholder text */
 }
 
 /* Label Styling */
