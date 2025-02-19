@@ -149,8 +149,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
+    <title>Contact Form with Map</title>
     <style>
+        /* Flexbox container for form and map */
+        .container {
+            display: flex;
+            gap: 20px; /* Space between form and map */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Your existing form styling */
         body {
             background-color: black;
             color: white;
@@ -178,42 +188,111 @@
             border: none;
             cursor: pointer;
         }
+
+        /* Map styling */
+        #map {
+            flex: 1;
+            height: 600px; /* Adjust height as needed */
+            border-radius: 10px;
+            border: 1px solid #555;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Stack form and map vertically */
+            }
+            #map {
+                height: 300px; /* Reduce map height on smaller screens */
+            }
+        }
     </style>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-    <div class="contact-form">
-    <form action="https://formspree.io/f/xdkogden" method="POST">
-        <!-- Name Field -->
-        <div class="form-field">
-            <label for="name">Name</label>
-            <input id="name" type="text" name="name" placeholder="Enter your name" required>
+    <div class="container">
+        <!-- Your existing form -->
+        <div class="contact-form">
+            <form action="https://formspree.io/f/xdkogden" method="POST">
+                <!-- Name Field -->
+                <div class="form-field">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" name="name" placeholder="Enter your name" required>
+                </div>
+
+                <!-- Location Field -->
+                <div class="form-field">
+                    <label for="location">Your Location</label>
+                    <input id="location" type="text" name="location" placeholder="Write your address" required>
+                </div>
+
+                <!-- Destination Field -->
+                <div class="form-field">
+                    <label for="destination">Destination</label>
+                    <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
+                </div>
+
+                <!-- Pickup Time Field -->
+                <div class="form-field">
+                    <label for="pickup-time">Pickup Time</label>
+                    <select id="pickup-time" name="pickup-time" required>
+                        <option value="" disabled selected>Select a time</option>
+                        <!-- Time options will be dynamically inserted here -->
+                    </select>
+                </div>
+
+                <!-- Hidden field for selected address -->
+                <input type="hidden" id="selected-address" name="selected-address">
+
+                <!-- Submit Button -->
+                <button type="submit">Send Message</button>
+            </form>
         </div>
 
-        <!-- Location Field -->
-        <div class="form-field">
-            <label for="location">Your Location</label>
-            <input id="location" type="text" name="location" placeholder="Write your address" required>
-        </div>
+        <!-- Map -->
+        <div id="map"></div>
+    </div>
 
-        <!-- Destination Field -->
-        <div class="form-field">
-            <label for="destination">Destination</label>
-            <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
-        </div>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-        <!-- Pickup Time Field -->
-        <div class="form-field">
-            <label for="pickup-time">Pickup Time</label>
-            <select id="pickup-time" name="pickup-time" required>
-                <option value="" disabled selected>Select a time</option>
-                <!-- Time options will be dynamically inserted here -->
-            </select>
-        </div>
+    <!-- Initialize the Map -->
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([51.505, -0.09], 13); // Default center and zoom level
 
-        <!-- Submit Button -->
-        <button type="submit">Send Message</button>
-    </form>
-</div>
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a marker
+        const marker = L.marker([51.505, -0.09], {
+            draggable: true // Allow the user to drag the marker
+        }).addTo(map);
+
+        // Function to reverse geocode using OpenStreetMap Nominatim API
+        function reverseGeocode(lat, lng) {
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+                .then(response => response.json())
+                .then(data => {
+                    const address = data.display_name;
+                    document.getElementById("selected-address").value = address;
+                    alert("Selected Address: " + address);
+                })
+                .catch(error => {
+                    console.error("Error fetching address:", error);
+                });
+        }
+
+        // Update the address when the marker is dragged
+        marker.on('dragend', function (e) {
+            const latLng = marker.getLatLng();
+            reverseGeocode(latLng.lat, latLng.lng);
+        });
+    </script>
+
     <!-- JavaScript to Generate Time Options -->
     <script>
         const pickupTimeSelect = document.getElementById('pickup-time');
