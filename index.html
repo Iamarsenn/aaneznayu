@@ -259,16 +259,16 @@
 
     <!-- Initialize the Map -->
     <script>
-        // Initialize the map
-        const map = L.map('map').setView([51.505, -0.09], 13); // Default center and zoom level
+        // Initialize the map with Chicago coordinates
+        const map = L.map('map').setView([41.8781, -87.6298], 13); // Chicago coordinates and zoom level
 
         // Add OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Add a marker
-        const marker = L.marker([51.505, -0.09], {
+        // Add a marker at Chicago
+        const marker = L.marker([41.8781, -87.6298], {
             draggable: true // Allow the user to drag the marker
         }).addTo(map);
 
@@ -313,25 +313,6 @@
     </script>
 </body>
 </html>
-
-<!-- JavaScript to Generate Time Options -->
-<script>
-    const pickupTimeSelect = document.getElementById('pickup-time');
-    const startTime = new Date();
-    startTime.setHours(00, 0, 0); // Start at 10:00 AM
-
-    const endTime = new Date();
-    endTime.setHours(24, 0, 0); // End at 10:00 PM
-
-    while (startTime <= endTime) {
-        const timeString = startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-        const option = document.createElement('option');
-        option.value = timeString;
-        option.textContent = timeString;
-        pickupTimeSelect.appendChild(option);
-        startTime.setMinutes(startTime.getMinutes() + 15); // Add 15 minutes
-    }
-</script>
 
     <!-- Contact Information Container -->
     <div class="w3-col contact-info-container" style="flex: 1; max-width: 48%; padding-left: 20px;">
