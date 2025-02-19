@@ -142,43 +142,99 @@ body {
         </div>
     </div>
 
-<!-- Contact Section -->
-<div class="w3-row" style="background-color: black; color: black; padding: 20px;">
-    <!-- Form Container -->
-    <div class="w3-col contact-form-container" style="flex: 1; style="background-color: white; color: black; max-width: 48%;">
-        <form action="https://formspree.io/f/xdkogden" method="POST" class="contact-form">
-            <!-- Name Field -->
-            <div class="form-field">
-                <label for="name" style="color: white;">Name</label>
-                <input id="name" type="text" name="name" placeholder="Enter your name" required style="background-color: #333; color: white; border: 1px solid #555; padding: 10px; width: 100%; box-sizing: border-box;">
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            padding: 20px;
+        }
+        .form-field {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            background-color: #333;
+            color: white;
+            border: 1px solid #555;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #FF0000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="w3-row">
+        <div class="w3-col contact-form-container" style="flex: 1; max-width: 48%;">
+            <form action="https://formspree.io/f/xdkogden" method="POST" class="contact-form">
+                <!-- Name Field -->
+                <div class="form-field">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" name="name" placeholder="Enter your name" required>
+                </div>
 
-            <!-- Location Field -->
-            <div class="form-field">
-                <label for="location" style="color: white;">Your Location</label>
-                <input id="location" type="text" name="location" placeholder="Write your address" required style="background-color: #333; color: white; border: 1px solid #555; padding: 10px; width: 100%; box-sizing: border-box;">
-            </div>
+                <!-- Location Field -->
+                <div class="form-field">
+                    <label for="location">Your Location</label>
+                    <input id="location" type="text" name="location" placeholder="Write your address" required>
+                </div>
 
-            <!-- Destination Field -->
-            <div class="form-field">
-                <label for="destination" style="color: white;">Destination</label>
-                <input id="destination" type="text" name="destination" placeholder="Write your destination" required style="background-color: #333; color: white; border: 1px solid #555; padding: 10px; width: 100%; box-sizing: border-box;">
-            </div>
+                <!-- Destination Field -->
+                <div class="form-field">
+                    <label for="destination">Destination</label>
+                    <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
+                </div>
 
-            <!-- Pickup Time Field -->
-            <div class="form-field">
-                <label for="pickup-time" style="color: white;">Pickup Time</label>
-                <select id="pickup-time" name="pickup-time" required style="background-color: #333; color: white; border: 1px solid #555; padding: 10px; width: 100%; box-sizing: border-box;">
-                    <option value="" disabled selected>Select a time</option>
-                    <!-- Time options will be dynamically inserted here -->
-                </select>
-            </div>
+                <!-- Pickup Time Field -->
+                <div class="form-field">
+                    <label for="pickup-time">Pickup Time</label>
+                    <select id="pickup-time" name="pickup-time" required>
+                        <option value="" disabled selected>Select a time</option>
+                        <!-- Time options will be dynamically inserted here -->
+                    </select>
+                </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="submit-btn" style="background-color: #FF0000; color: white; padding: 10px 20px; border: none; cursor: pointer; margin-top: 10px;">Send Message</button>
-        </form>
+                <!-- Submit Button -->
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
     </div>
-</div>
+
+    <!-- JavaScript to Generate Time Options -->
+    <script>
+        const pickupTimeSelect = document.getElementById('pickup-time');
+        const startTime = new Date();
+        startTime.setHours(10, 0, 0); // Start at 10:00 AM
+
+        const endTime = new Date();
+        endTime.setHours(22, 0, 0); // End at 10:00 PM
+
+        while (startTime <= endTime) {
+            const timeString = startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+            const option = document.createElement('option');
+            option.value = timeString;
+            option.textContent = timeString;
+            pickupTimeSelect.appendChild(option);
+            startTime.setMinutes(startTime.getMinutes() + 15); // Add 15 minutes
+        }
+    </script>
+</body>
+</html>
 
 <!-- JavaScript to Generate Time Options -->
 <script>
