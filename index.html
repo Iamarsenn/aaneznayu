@@ -345,6 +345,9 @@
         }
 
         document.getElementById("calculate-btn").addEventListener("click", fetchRoute);
+        document.getElementById('map').addEventListener('click', function (event) {
+    event.preventDefault();
+});
 
         const pickupTimeSelect = document.getElementById('pickup-time');
         const startTime = new Date();
