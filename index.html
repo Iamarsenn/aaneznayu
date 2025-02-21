@@ -277,7 +277,7 @@
 <body>
     <div class="container">
         <div class="contact-form">
-            <form action="https://formspree.io/f/xdkogden" method="POST">
+            <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
                 <div class="form-field">
                     <label for="name">Name</label>
                     <input id="name" type="text" name="name" placeholder="Enter your name" required>
@@ -291,15 +291,15 @@
                     <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
                 </div>
                 <div class="form-field">
+                    <p id="distance-time"></p>
+                </div>
+                <div class="form-field">
                     <label for="pickup-time">Pickup Time</label>
                     <select id="pickup-time" name="pickup-time" required>
                         <option value="" disabled selected>Select a time</option>
                     </select>
                 </div>
-                <div class="form-field">
-                    <p id="distance-time"></p>
-                </div>
-                <button type="submit">Send Message</button>
+                <button type="submit" id="submit-btn" disabled>Send Message</button>
             </form>
         </div>
         <div id="map"></div>
@@ -336,6 +336,7 @@
                                     const distance = (routeData.routes[0].distance / 1000).toFixed(2);
                                     const duration = Math.ceil(routeData.routes[0].duration / 60);
                                     document.getElementById("distance-time").innerText = `Estimated Distance: ${distance} km | Estimated Time: ${duration} mins`;
+                                    document.getElementById("submit-btn").disabled = false;
                                 });
                         });
                 });
@@ -361,6 +362,7 @@
     </script>
 </body>
 </html>
+
 
 
     <!-- Contact Information Container -->
