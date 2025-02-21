@@ -1,26 +1,8 @@
-<!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-<!-- Leaflet JavaScript -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <!DOCTYPE html>
-<html>
-</head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Gold Coast Chauffeurs</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* Prevents horizontal scrollbar */
-        }
-    </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="keywords" content="COMFORTABLE RIDE IN A PREMIUM CAR">
-    <meta name="author" content="Gold Coast Chauffeurs">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gold Coast Chauffeurs</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Lobster|Satisfy|Courgette">
@@ -29,17 +11,15 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body style="background-color: black;">
-<body>
-<!-- Middle Banner with Purple Background -->
-<div class="proposal-banner">
-    <h1>Book Your Car Now</h1>
-</div>
-<div class="w3-center" style="background-color: #FF0000 !important; color: white !important; height: 40px; padding-top:10px; line-height: 1.2; margin-top: 50px;">
-    <h2 style="margin: 0; font-size: 16px;">Get 20% off when you first try our services</h2>
-</div>
+    <!-- Middle Banner with Purple Background -->
+    <div class="proposal-banner">
+        <h1>Book Your Car Now</h1>
+    </div>
+    <div class="w3-center" style="background-color: #FF0000 !important; color: white !important; height: 40px; padding-top:10px; line-height: 1.2; margin-top: 50px;">
+        <h2 style="margin: 0; font-size: 16px;">Get 20% off when you first try our services</h2>
+    </div>
 
-<body>
-    <!-- Section to Match Screenshot -->
+    <!-- Custom Section -->
     <div class="custom-section w3-center" style="margin-top: 0; padding: 0; width: 100%; background-color: black; color: white;">
         <h2 style="font-weight: bold; color: white;">BOOK YOUR PREMIUM CAR NOW</h2>
         <p style="color: white;">WELCOME TO GOLD COAST CHAUFFEURS - YOUR PERFECT PARTNER FOR AN UNFORGETTABLE RIDE</p>
@@ -47,51 +27,50 @@
             <button class="w3-button w3-black" style="padding: 10px 20px; font-size: 16px; margin-top: 20px; margin-bottom: 30px;">BOOK YOUR RIDE NOW</button>
         </a>
     </div>
-</body>
-</html>
-<!-- NAVBAR -->
-<div class="w3-top">
-    <div class="w3-bar w3-cream" id="myNavbar">
-        <a href="index.html" class="w3-bar-item w3-button w3-center">
-            <i class="fa fa-home w3-margin-right"></i><b>Gold </b> Coast Chauffeurs
-        </a>
-        
-        <!-- Hamburger Menu for Mobile -->
-        <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right" 
-           href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
-            <i class="fa fa-bars"></i>
-        </a>
 
-        <!-- Main Navigation Links -->
-<a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
-            <i class="fa fa-info-circle"></i> About
-        </a>
-        <a href="#cars" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
-            <i class="fa fa-th"></i> Cars
-        </a>
-        <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
-            <i class="fa fa-envelope"></i> Contact
-        </a>
+    <!-- NAVBAR -->
+    <div class="w3-top">
+        <div class="w3-bar w3-cream" id="myNavbar">
+            <a href="index.html" class="w3-bar-item w3-button w3-center">
+                <i class="fa fa-home w3-margin-right"></i><b>Gold </b> Coast Chauffeurs
+            </a>
+
+            <!-- Hamburger Menu for Mobile -->
+            <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right" 
+               href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+                <i class="fa fa-bars"></i>
+            </a>
+
+            <!-- Main Navigation Links -->
+            <a href="#about" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
+                <i class="fa fa-info-circle"></i> About
+            </a>
+            <a href="#cars" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
+                <i class="fa fa-th"></i> Cars
+            </a>
+            <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
+                <i class="fa fa-envelope"></i> Contact
+            </a>
+        </div>
+
+        <!-- Mobile Navigation (Hidden by default) -->
+        <div id="navSmall" class="w3-bar-block w3-cream w3-hide w3-hide-large w3-hide-medium">
+            <a href="#about" class="w3-bar-item w3-button">About</a>
+            <a href="#cars" class="w3-bar-item w3-button">Cars</a>
+            <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+        </div>
     </div>
 
-    <!-- Mobile Navigation (Hidden by default) -->
-    <div id="navSmall" class="w3-bar-block w3-cream w3-hide w3-hide-large w3-hide-medium">
-        <a href="#about" class="w3-bar-item w3-button">About</a>
-        <a href="#cars" class="w3-bar-item w3-button">Cars</a>
-        <a href="#contact" class="w3-bar-item w3-button">Contact</a>
-    </div>
-</div>
-
-<script>
-    function toggleFunction() {
-        var x = document.getElementById("navSmall");
-        if (x.classList.contains("w3-show")) {
-            x.classList.remove("w3-show");
-        } else {
-            x.classList.add("w3-show");
+    <script>
+        function toggleFunction() {
+            var x = document.getElementById("navSmall");
+            if (x.classList.contains("w3-show")) {
+                x.classList.remove("w3-show");
+            } else {
+                x.classList.add("w3-show");
+            }
         }
-    }
-</script>
+    </script>
 
     <!-- Hero Section -->
     <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
@@ -99,6 +78,53 @@
             <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">Gold Coast  <span class="w3-hide-small">Chauffeurs</span></span>
         </div>
     </div>
+
+    <!-- Contact Form Section -->
+    <div class="container">
+        <div class="contact-form">
+            <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
+                <div class="form-field">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-field">
+                    <label for="location">Your Location</label>
+                    <input id="location" type="text" name="location" placeholder="Write your address" required>
+                </div>
+                <div class="form-field">
+                    <label for="destination">Destination</label>
+                    <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
+                </div>
+                <div class="form-field">
+                    <p id="distance-time"></p>
+                </div>
+                <div class="form-field">
+                    <label for="pickup-time">Pickup Time</label>
+                    <select id="pickup-time" name="pickup-time" required>
+                        <option value="" disabled selected>Select a time</option>
+                    </select>
+                </div>
+                <button type="button" id="calculate-btn">Calculate Time & Distance</button>
+                <button type="submit" id="submit-btn" disabled>Send Message</button>
+            </form>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([41.8781, -87.6298], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        const marker = L.marker([41.8781, -87.6298], { draggable: true }).addTo(map);
+        
+        // Fetch route logic and other code...
+    </script>
+
+</body>
+</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
