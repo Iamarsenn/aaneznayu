@@ -297,10 +297,8 @@
                     </select>
                 </div>
                 <div class="form-field">
-                    <label>Estimated Distance & Time</label>
-                    <p id="route-info">Enter addresses to see details.</p>
+                    <p id="distance-time"></p>
                 </div>
-                <input type="hidden" id="selected-address" name="selected-address">
                 <button type="submit">Send Message</button>
             </form>
         </div>
@@ -314,51 +312,56 @@
         }).addTo(map);
         const marker = L.marker([41.8781, -87.6298], { draggable: true }).addTo(map);
 
-        async function getRoute() {
-            const location = document.getElementById('location').value;
-            const destination = document.getElementById('destination').value;
-            const routeInfo = document.getElementById('route-info');
+        function fetchRoute() {
+            const location = document.getElementById("location").value;
+            const destination = document.getElementById("destination").value;
             if (!location || !destination) return;
             
-            const apiKey = 'your-openrouteservice-api-key';
-            const baseUrl = 'https://api.openrouteservice.org/geocode/search?api_key=' + apiKey + '&text=';
-            
-            try {
-                const locRes = await fetch(baseUrl + encodeURIComponent(location));
-                const destRes = await fetch(baseUrl + encodeURIComponent(destination));
-                const locData = await locRes.json();
-                const destData = await destRes.json();
-                
-                if (!locData.features.length || !destData.features.length) {
-                    routeInfo.textContent = 'Invalid addresses.';
-                    return;
-                }
-                
-                const locCoords = locData.features[0].geometry.coordinates;
-                const destCoords = destData.features[0].geometry.coordinates;
-                
-                const routeUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${locCoords.join(',')}&end=${destCoords.join(',')}`;
-                const routeRes = await fetch(routeUrl);
-                const routeData = await routeRes.json();
-                
-                if (routeData.routes) {
-                    const distance = (routeData.routes[0].summary.distance / 1000).toFixed(2);
-                    const duration = Math.round(routeData.routes[0].summary.duration / 60);
-                    routeInfo.textContent = `Distance: ${distance} km, Estimated Time: ${duration} min`;
-                } else {
-                    routeInfo.textContent = 'Could not retrieve route information.';
-                }
-            } catch (error) {
-                console.error('Error fetching route:', error);
-                routeInfo.textContent = 'Error fetching route details.';
-            }
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${location}`)
+                .then(res => res.json())
+                .then(locData => {
+                    if (locData.length === 0) return;
+                    const locCoords = [locData[0].lat, locData[0].lon];
+                    
+                    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${destination}`)
+                        .then(res => res.json())
+                        .then(destData => {
+                            if (destData.length === 0) return;
+                            const destCoords = [destData[0].lat, destData[0].lon];
+                            
+                            fetch(`https://router.project-osrm.org/route/v1/driving/${locCoords[1]},${locCoords[0]};${destCoords[1]},${destCoords[0]}?overview=false`)
+                                .then(res => res.json())
+                                .then(routeData => {
+                                    if (routeData.routes.length === 0) return;
+                                    const distance = (routeData.routes[0].distance / 1000).toFixed(2);
+                                    const duration = Math.ceil(routeData.routes[0].duration / 60);
+                                    document.getElementById("distance-time").innerText = `Estimated Distance: ${distance} km | Estimated Time: ${duration} mins`;
+                                });
+                        });
+                });
         }
-        
-        document.getElementById('location').addEventListener('blur', getRoute);
-        document.getElementById('destination').addEventListener('blur', getRoute);
+
+        document.getElementById("location").addEventListener("blur", fetchRoute);
+        document.getElementById("destination").addEventListener("blur", fetchRoute);
+
+        const pickupTimeSelect = document.getElementById('pickup-time');
+        const startTime = new Date();
+        startTime.setHours(10, 0, 0);
+        const endTime = new Date();
+        endTime.setHours(22, 0, 0);
+
+        while (startTime <= endTime) {
+            const timeString = startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
+            const option = document.createElement('option');
+            option.value = timeString;
+            option.textContent = timeString;
+            pickupTimeSelect.appendChild(option);
+            startTime.setMinutes(startTime.getMinutes() + 15);
+        }
     </script>
 </body>
 </html>
+
 
     <!-- Contact Information Container -->
     <div class="w3-col contact-info-container" style="flex: 1; max-width: 48%; padding-left: 20px;">
