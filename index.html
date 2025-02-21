@@ -256,6 +256,7 @@
             padding: 10px 20px;
             border: none;
             cursor: pointer;
+            margin-right: 10px;
         }
         #map {
             flex: 1;
@@ -299,6 +300,7 @@
                         <option value="" disabled selected>Select a time</option>
                     </select>
                 </div>
+                <button type="button" id="calculate-btn">Calculate Time & Distance</button>
                 <button type="submit" id="submit-btn" disabled>Send Message</button>
             </form>
         </div>
@@ -342,8 +344,7 @@
                 });
         }
 
-        document.getElementById("location").addEventListener("blur", fetchRoute);
-        document.getElementById("destination").addEventListener("blur", fetchRoute);
+        document.getElementById("calculate-btn").addEventListener("click", fetchRoute);
 
         const pickupTimeSelect = document.getElementById('pickup-time');
         const startTime = new Date();
@@ -362,8 +363,6 @@
     </script>
 </body>
 </html>
-
-
 
     <!-- Contact Information Container -->
     <div class="w3-col contact-info-container" style="flex: 1; max-width: 48%; padding-left: 20px;">
