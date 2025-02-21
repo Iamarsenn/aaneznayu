@@ -92,6 +92,14 @@
 .contact-form button:hover {
     background-color: #8B0000; /* Darker green on hover */
 }
+#map {
+    flex: 1;
+    height: 600px;
+    border-radius: 10px;
+    border: 1px solid #555;
+    position: relative; /* Ensures it doesn't affect layout unexpectedly */
+    z-index: 1; /* Make sure it's above other elements */
+}
 
 /* Label Styling */
 .contact-form label {
