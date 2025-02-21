@@ -223,16 +223,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Form with Map</title>
     <style>
-        /* Flexbox container for form and map */
         .container {
             display: flex;
-            gap: 20px; /* Space between form and map */
+            gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-
-        /* Your existing form styling */
         body {
             background-color: black;
             color: white;
@@ -260,128 +257,105 @@
             border: none;
             cursor: pointer;
         }
-
-        /* Map styling */
         #map {
             flex: 1;
-            height: 600px; /* Adjust height as needed */
+            height: 600px;
             border-radius: 10px;
             border: 1px solid #555;
         }
-
-        /* Media query for smaller screens */
         @media (max-width: 768px) {
             .container {
-                flex-direction: column; /* Stack form and map vertically */
+                flex-direction: column;
             }
             #map {
-                height: 300px; /* Reduce map height on smaller screens */
+                height: 300px;
             }
         }
     </style>
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
     <div class="container">
-        <!-- Your existing form -->
         <div class="contact-form">
             <form action="https://formspree.io/f/xdkogden" method="POST">
-                <!-- Name Field -->
                 <div class="form-field">
                     <label for="name">Name</label>
                     <input id="name" type="text" name="name" placeholder="Enter your name" required>
                 </div>
-
-                <!-- Location Field -->
                 <div class="form-field">
                     <label for="location">Your Location</label>
                     <input id="location" type="text" name="location" placeholder="Write your address" required>
                 </div>
-
-                <!-- Destination Field -->
                 <div class="form-field">
                     <label for="destination">Destination</label>
                     <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
                 </div>
-
-                <!-- Pickup Time Field -->
                 <div class="form-field">
                     <label for="pickup-time">Pickup Time</label>
                     <select id="pickup-time" name="pickup-time" required>
                         <option value="" disabled selected>Select a time</option>
-                        <!-- Time options will be dynamically inserted here -->
                     </select>
                 </div>
-
-                <!-- Hidden field for selected address -->
+                <div class="form-field">
+                    <label>Estimated Distance & Time</label>
+                    <p id="route-info">Enter addresses to see details.</p>
+                </div>
                 <input type="hidden" id="selected-address" name="selected-address">
-
-                <!-- Submit Button -->
                 <button type="submit">Send Message</button>
             </form>
         </div>
-
-        <!-- Map -->
         <div id="map"></div>
     </div>
-
-    <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-    <!-- Initialize the Map -->
     <script>
-        // Initialize the map with Chicago coordinates
-        const map = L.map('map').setView([41.8781, -87.6298], 13); // Chicago coordinates and zoom level
-
-        // Add OpenStreetMap tiles
+        const map = L.map('map').setView([41.8781, -87.6298], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
+        const marker = L.marker([41.8781, -87.6298], { draggable: true }).addTo(map);
 
-        // Add a marker at Chicago
-        const marker = L.marker([41.8781, -87.6298], {
-            draggable: true // Allow the user to drag the marker
-        }).addTo(map);
-
-        // Function to reverse geocode using OpenStreetMap Nominatim API
-        function reverseGeocode(lat, lng) {
-            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
-                .then(response => response.json())
-                .then(data => {
-                    const address = data.display_name;
-                    document.getElementById("selected-address").value = address;
-                    alert("Selected Address: " + address);
-                })
-                .catch(error => {
-                    console.error("Error fetching address:", error);
-                });
+        async function getRoute() {
+            const location = document.getElementById('location').value;
+            const destination = document.getElementById('destination').value;
+            const routeInfo = document.getElementById('route-info');
+            if (!location || !destination) return;
+            
+            const apiKey = 'your-openrouteservice-api-key';
+            const baseUrl = 'https://api.openrouteservice.org/geocode/search?api_key=' + apiKey + '&text=';
+            
+            try {
+                const locRes = await fetch(baseUrl + encodeURIComponent(location));
+                const destRes = await fetch(baseUrl + encodeURIComponent(destination));
+                const locData = await locRes.json();
+                const destData = await destRes.json();
+                
+                if (!locData.features.length || !destData.features.length) {
+                    routeInfo.textContent = 'Invalid addresses.';
+                    return;
+                }
+                
+                const locCoords = locData.features[0].geometry.coordinates;
+                const destCoords = destData.features[0].geometry.coordinates;
+                
+                const routeUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${locCoords.join(',')}&end=${destCoords.join(',')}`;
+                const routeRes = await fetch(routeUrl);
+                const routeData = await routeRes.json();
+                
+                if (routeData.routes) {
+                    const distance = (routeData.routes[0].summary.distance / 1000).toFixed(2);
+                    const duration = Math.round(routeData.routes[0].summary.duration / 60);
+                    routeInfo.textContent = `Distance: ${distance} km, Estimated Time: ${duration} min`;
+                } else {
+                    routeInfo.textContent = 'Could not retrieve route information.';
+                }
+            } catch (error) {
+                console.error('Error fetching route:', error);
+                routeInfo.textContent = 'Error fetching route details.';
+            }
         }
-
-        // Update the address when the marker is dragged
-        marker.on('dragend', function (e) {
-            const latLng = marker.getLatLng();
-            reverseGeocode(latLng.lat, latLng.lng);
-        });
-    </script>
-
-    <!-- JavaScript to Generate Time Options -->
-    <script>
-        const pickupTimeSelect = document.getElementById('pickup-time');
-        const startTime = new Date();
-        startTime.setHours(10, 0, 0); // Start at 10:00 AM
-
-        const endTime = new Date();
-        endTime.setHours(22, 0, 0); // End at 10:00 PM
-
-        while (startTime <= endTime) {
-            const timeString = startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-            const option = document.createElement('option');
-            option.value = timeString;
-            option.textContent = timeString;
-            pickupTimeSelect.appendChild(option);
-            startTime.setMinutes(startTime.getMinutes() + 15); // Add 15 minutes
-        }
+        
+        document.getElementById('location').addEventListener('blur', getRoute);
+        document.getElementById('destination').addEventListener('blur', getRoute);
     </script>
 </body>
 </html>
