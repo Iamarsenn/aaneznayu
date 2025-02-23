@@ -80,44 +80,71 @@
     </div>
 
     <!-- Contact Form Section -->
-    <div class="container">
-        <div class="contact-form">
-            <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
-                <div class="form-field">
-                    <label for="name">Name</label>
-                    <input id="name" type="text" name="name" placeholder="Enter your name" required>
-                </div>
-                <div class="form-field">
-                    <label for="name">Your email</label>
-                    <input id="name" type="text" name="name" placeholder="Enter your email" required>
-                </div>
-                <div class="form-field">
-                    <label for="name">Your phone number</label>
-                    <input id="name" type="text" name="name" placeholder="Enter your phone number" required>
-                </div>
-                <div class="form-field">
-                    <label for="location">Your Location</label>
-                    <input id="location" type="text" name="location" placeholder="Write your address" required>
-                </div>
-                <div class="form-field">
-                    <label for="destination">Destination</label>
-                    <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
-                </div>
-                <div class="form-field">
-                    <p id="distance-time"></p>
-                </div>
-                <div class="form-field">
-                    <label for="pickup-time">Pickup Time</label>
-                    <select id="pickup-time" name="pickup-time" required>
-                        <option value="" disabled selected>Select a time</option>
-                    </select>
-                </div>
-                <button type="button" id="calculate-btn">Calculate Time & Distance</button>
-                <button type="submit" id="submit-btn" disabled>Send Message</button>
-            </form>
-        </div>
-        <div id="map"></div>
+   <div class="container">
+    <div class="contact-form">
+        <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
+            <div class="form-field">
+                <label for="name">Name</label>
+                <input id="name" type="text" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-field">
+                <label for="email">Your email</label>
+                <input id="email" type="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-field">
+                <label for="phone">Your phone number</label>
+                <input id="phone" type="text" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-field">
+                <label for="location">Your Location</label>
+                <input id="location" type="text" name="location" placeholder="Write your address" required>
+            </div>
+            <div class="form-field">
+                <label for="destination">Destination</label>
+                <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
+            </div>
+            <div class="form-field">
+                <p id="distance-time"></p>
+            </div>
+            <div class="form-field">
+                <label for="pickup-time">Pickup Time</label>
+                <select id="pickup-time" name="pickup-time" required>
+                    <option value="" disabled selected>Select a time</option>
+                </select>
+            </div>
+            <button type="button" id="calculate-btn">Calculate Time & Distance</button>
+            <button type="submit" id="submit-btn" disabled>Send Message</button>
+        </form>
     </div>
+    <div id="map"></div>
+</div>
+
+<script>
+    function generateTimeOptions() {
+        const pickupTimeSelect = document.getElementById('pickup-time');
+        let startTime = new Date();
+        startTime.setHours(0, 0, 0); // Set to 12:00 AM
+        let endTime = new Date();
+        endTime.setHours(23, 59, 0); // Set to 11:59 PM
+
+        while (startTime <= endTime) {
+            const timeString = startTime.toLocaleTimeString([], { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                hour12: true 
+            });
+
+            const option = document.createElement('option');
+            option.value = timeString;
+            option.textContent = timeString;
+            pickupTimeSelect.appendChild(option);
+
+            startTime.setMinutes(startTime.getMinutes() + 15); // Increment by 15 minutes
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', generateTimeOptions);
+</script>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
