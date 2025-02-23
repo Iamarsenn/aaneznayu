@@ -65,6 +65,9 @@
 }
 img {
     background: none;
+img {
+    background-color: transparent;
+}
 }
 /* Form Element Styling */
 .contact-form input[type="text"],
