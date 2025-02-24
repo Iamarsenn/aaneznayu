@@ -71,15 +71,7 @@
             }
         }
     </script>
-
-    <!-- Hero Section -->
-    <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
-        <div class="w3-display-middle" style="white-space:nowrap;">
-            <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">Gold Coast  <span class="w3-hide-small">Chauffeurs</span></span>
-        </div>
-    </div>
-
-    <!-- Contact Form Section -->
+<!-- Contact Form Section -->
 <div class="container">
     <div class="contact-form">
         <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
@@ -119,11 +111,35 @@
 </div>
 
 <script>
+    // Haversine formula to calculate distance between two coordinates
+    function haversineDistance(lat1, lon1, lat2, lon2) {
+        const toRadians = (degrees) => degrees * (Math.PI / 180); // Convert degrees to radians
+        const R = 6371; // Earth's radius in kilometers
+
+        const dLat = toRadians(lat2 - lat1);
+        const dLon = toRadians(lon2 - lon1);
+
+        const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c; // Distance in kilometers
+    }
+
+    // Estimate travel time based on distance and average speed
+    function estimateTravelTime(distanceKm, averageSpeedKmh = 50) {
+        const timeHours = distanceKm / averageSpeedKmh; // Time in hours
+        const timeMinutes = timeHours * 60; // Convert hours to minutes
+        return Math.ceil(timeMinutes); // Round up to the nearest minute
+    }
+
     async function getCoordinates(address) {
         const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
         const data = await response.json();
         if (data.length === 0) return null;
-        return [data[0].lon, data[0].lat]; // [longitude, latitude]
+        return [parseFloat(data[0].lat), parseFloat(data[0].lon)]; // [latitude, longitude]
     }
 
     async function calculateTimeAndDistance() {
@@ -147,26 +163,22 @@
             return;
         }
 
-        const apiKey = "5b3ce3597851110001cf62489cde1d32cb7a49fab59428d1e7ca99ce"; // Replace with your OpenRouteService API key
-        const routeUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${originCoords[0]},${originCoords[1]}&end=${destinationCoords[0]},${destinationCoords[1]}`;
+        // Calculate distance using Haversine formula
+        const distanceKm = haversineDistance(
+            originCoords[0], originCoords[1], // Origin latitude and longitude
+            destinationCoords[0], destinationCoords[1] // Destination latitude and longitude
+        );
 
-        try {
-            const response = await fetch(routeUrl);
-            const data = await response.json();
+        // Estimate travel time
+        const timeMinutes = estimateTravelTime(distanceKm);
 
-            if (!data.routes) throw new Error("No route found.");
+        // Display results
+        output.innerHTML = `
+            <strong>Estimated Distance:</strong> ${distanceKm.toFixed(1)} km <br>
+            <strong>Estimated Time:</strong> ${timeMinutes} mins
+        `;
 
-            const distanceKm = (data.routes[0].summary.distance / 1000).toFixed(1); // Convert meters to km
-            const durationMinutes = Math.ceil(data.routes[0].summary.duration / 60); // Convert seconds to minutes
-
-            output.innerHTML = `<strong>Estimated Distance:</strong> ${distanceKm} km <br> 
-                                <strong>Estimated Time:</strong> ${durationMinutes} mins`;
-
-            submitButton.disabled = false; // Enable submission
-        } catch (error) {
-            output.innerHTML = "<span style='color: red;'>Error calculating route. Try again.</span>";
-            submitButton.disabled = true;
-        }
+        submitButton.disabled = false; // Enable submission
     }
 
     function generateTimeOptions() {
@@ -197,20 +209,6 @@
         document.getElementById("calculate-btn").addEventListener("click", calculateTimeAndDistance);
     });
 </script>
-    <!-- Scripts -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        const map = L.map('map').setView([41.8781, -87.6298], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
-        }).addTo(map);
-        const marker = L.marker([41.8781, -87.6298], { draggable: true }).addTo(map);
-        
-        // Fetch route logic and other code...
-    </script>
-
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
