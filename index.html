@@ -110,12 +110,24 @@
     </div>
 </div>
 
-<script>
-    // Haversine formula to calculate distance between two coordinates
-    function haversineDistance(lat1, lon1, lat2, lon2) {
-        const toRadians = (degrees) => degrees * (Math.PI / 180); // Convert degrees to radians
-        const R = 6371; // Earth's radius in kilometers
+<!-- Map Container -->
+<div id="map" style="height: 400px; width: 100%; margin-top: 20px;"></div>
 
+<!-- Leaflet CSS and JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // Initialize the map
+    const map = L.map('map').setView([0, 0], 2); // Default center and zoom
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Haversine formula to calculate distance
+    function haversineDistance(lat1, lon1, lat2, lon2) {
+        const toRadians = (degrees) => degrees * (Math.PI / 180);
+        const R = 6371; // Earth's radius in kilometers
         const dLat = toRadians(lat2 - lat1);
         const dLon = toRadians(lon2 - lon1);
 
@@ -130,8 +142,8 @@
 
     // Estimate travel time based on distance and average speed
     function estimateTravelTime(distanceKm, averageSpeedKmh = 50) {
-        const timeHours = distanceKm / averageSpeedKmh; // Time in hours
-        const timeMinutes = timeHours * 60; // Convert hours to minutes
+        const timeHours = distanceKm / averageSpeedKmh;
+        const timeMinutes = timeHours * 60;
         return Math.ceil(timeMinutes); // Round up to the nearest minute
     }
 
@@ -178,7 +190,34 @@
             <strong>Estimated Time:</strong> ${timeMinutes} mins
         `;
 
+        // Update the map
+        updateMap(originCoords, destinationCoords);
+
         submitButton.disabled = false; // Enable submission
+    }
+
+    // Function to update the map with origin and destination markers
+    function updateMap(originCoords, destinationCoords) {
+        // Clear existing markers and layers
+        map.eachLayer((layer) => {
+            if (layer instanceof L.Marker || layer instanceof L.Polyline) {
+                map.removeLayer(layer);
+            }
+        });
+
+        // Add markers for origin and destination
+        const originMarker = L.marker([originCoords[0], originCoords[1]]).addTo(map);
+        const destinationMarker = L.marker([destinationCoords[0], destinationCoords[1]]).addTo(map);
+
+        // Add a polyline to connect the two points
+        const polyline = L.polyline([
+            [originCoords[0], originCoords[1]],
+            [destinationCoords[0], destinationCoords[1]]
+        ], { color: 'blue' }).addTo(map);
+
+        // Fit the map to show both markers
+        const bounds = L.latLngBounds([originCoords[0], originCoords[1]], [destinationCoords[0], destinationCoords[1]]);
+        map.fitBounds(bounds);
     }
 
     function generateTimeOptions() {
