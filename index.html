@@ -80,7 +80,7 @@
     </div>
 
     <!-- Contact Form Section -->
-   <div class="container">
+<div class="container">
     <div class="contact-form">
         <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
             <div class="form-field">
@@ -116,18 +116,67 @@
             <button type="submit" id="submit-btn" disabled>Send Message</button>
         </form>
     </div>
-    <div id="map"></div>
 </div>
 
 <script>
+    async function getCoordinates(address) {
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+        const data = await response.json();
+        if (data.length === 0) return null;
+        return [data[0].lon, data[0].lat]; // [longitude, latitude]
+    }
+
+    async function calculateTimeAndDistance() {
+        const origin = document.getElementById("location").value.trim();
+        const destination = document.getElementById("destination").value.trim();
+        const output = document.getElementById("distance-time");
+        const submitButton = document.getElementById("submit-btn");
+
+        if (!origin || !destination) {
+            output.innerHTML = "<span style='color: red;'>Please enter both location and destination.</span>";
+            submitButton.disabled = true;
+            return;
+        }
+
+        const originCoords = await getCoordinates(origin);
+        const destinationCoords = await getCoordinates(destination);
+
+        if (!originCoords || !destinationCoords) {
+            output.innerHTML = "<span style='color: red;'>Invalid address. Try again.</span>";
+            submitButton.disabled = true;
+            return;
+        }
+
+        const apiKey = "5b3ce3597851110001cf62489cde1d32cb7a49fab59428d1e7ca99ce"; // Replace with your OpenRouteService API key
+        const routeUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${originCoords[0]},${originCoords[1]}&end=${destinationCoords[0]},${destinationCoords[1]}`;
+
+        try {
+            const response = await fetch(routeUrl);
+            const data = await response.json();
+
+            if (!data.routes) throw new Error("No route found.");
+
+            const distanceKm = (data.routes[0].summary.distance / 1000).toFixed(1); // Convert meters to km
+            const durationMinutes = Math.ceil(data.routes[0].summary.duration / 60); // Convert seconds to minutes
+
+            output.innerHTML = `<strong>Estimated Distance:</strong> ${distanceKm} km <br> 
+                                <strong>Estimated Time:</strong> ${durationMinutes} mins`;
+
+            submitButton.disabled = false; // Enable submission
+        } catch (error) {
+            output.innerHTML = "<span style='color: red;'>Error calculating route. Try again.</span>";
+            submitButton.disabled = true;
+        }
+    }
+
     function generateTimeOptions() {
         const pickupTimeSelect = document.getElementById('pickup-time');
-        let startTime = new Date();
-        startTime.setHours(0, 0, 0); // Set to 12:00 AM
-        let endTime = new Date();
-        endTime.setHours(23, 59, 0); // Set to 11:59 PM
+        pickupTimeSelect.innerHTML = '<option value="" disabled selected>Select a time</option>'; // Reset options
 
-        while (startTime <= endTime) {
+        let startTime = new Date();
+        startTime.setHours(0, 0, 0, 0); // Start at midnight
+
+        for (let i = 0; i < 96; i++) { // 96 intervals of 15 min in 24 hours
             const timeString = startTime.toLocaleTimeString([], { 
                 hour: '2-digit', 
                 minute: '2-digit', 
@@ -143,9 +192,11 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', generateTimeOptions);
+    document.addEventListener('DOMContentLoaded', () => {
+        generateTimeOptions();
+        document.getElementById("calculate-btn").addEventListener("click", calculateTimeAndDistance);
+    });
 </script>
-
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
