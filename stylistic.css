@@ -6,6 +6,18 @@
 <title>Centered Contact Form</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Lobster|Satisfy|Courgette">
 <style>
+    @media (max-width: 600px) {
+        .w3-display-middle {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            text-align: center;
+            width: 100%;
+        }
+    }
+</style>
+<style>
     /* General Body and HTML Styling */
     body, html {
         height: 100%;
@@ -69,6 +81,7 @@ img {
     background-color: transparent;
 }
 }
+
 /* Form Element Styling */
 .contact-form input[type="text"],
 .contact-form input[type="email"],
