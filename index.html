@@ -71,223 +71,216 @@
             }
         }
     </script>
-<!-- Contact Form Section -->
-<div class="container">
-    <div class="contact-form">
-        <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
-            <div class="form-field">
-                <label for="name">Name</label>
-                <input id="name" type="text" name="name" placeholder="Enter your name" required>
-            </div>
-            <div class="form-field">
-                <label for="email">Your email</label>
-                <input id="email" type="email" name="email" placeholder="Enter your email" required>
-            </div>
-            <div class="form-field">
-                <label for="phone">Your phone number</label>
-                <input id="phone" type="text" name="phone" placeholder="Enter your phone number" required>
-            </div>
-            <div class="form-field">
-                <label for="location">Your Location</label>
-                <input id="location" type="text" name="location" placeholder="Write your address" required>
-            </div>
-            <div class="form-field">
-                <label for="destination">Destination</label>
-                <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
-            </div>
-            <div class="form-field">
-                <p id="distance-time"></p>
-            </div>
-            <!-- New Date Input Field -->
-            <div class="form-field">
-                <label for="date">Pickup Date</label>
-                <input id="date" type="date" name="date" required>
-            </div>
-            <div class="form-field">
-                <label for="pickup-time">Pickup Time</label>
-                <select id="pickup-time" name="pickup-time" required>
-                    <option value="" disabled selected>Select a time</option>
-                </select>
-            </div>
-            <button type="button" id="calculate-btn">Calculate Time & Distance</button>
-            <button type="submit" id="submit-btn" disabled>Send Message</button>
-        </form>
-    </div>
-</div>
-    <!-- Map Container -->
-    <div id="map"></div>
-</div>
-
-<!-- Leaflet CSS and JS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<!-- Custom CSS for Map Layout -->
-<style>
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .contact-form {
-        flex: 1;
-        min-width: 300px;
-    }
-
-    #map {
-        flex: 1;
-        height: 400px;
-        min-width: 300px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-    }
-
-    /* Mobile Styles */
-    @media (max-width: 768px) {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form with Map</title>
+    <!-- Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Custom CSS -->
+    <style>
         .container {
-            flex-direction: column;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
         }
 
         #map {
-            width: 100%;
-            height: 300px;
-            margin-top: 20px;
-        }
-    }
-</style>
-
-<script>
-    // Initialize the map centered on Chicago
-    const map = L.map('map').setView([41.8781, -87.6298], 10); // Chicago coordinates and zoom level
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Haversine formula to calculate distance
-    function haversineDistance(lat1, lon1, lat2, lon2) {
-        const toRadians = (degrees) => degrees * (Math.PI / 180);
-        const R = 6371; // Earth's radius in kilometers
-        const dLat = toRadians(lat2 - lat1);
-        const dLon = toRadians(lon2 - lon1);
-
-        const a =
-            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c; // Distance in kilometers
-    }
-
-    // Estimate travel time based on distance and average speed
-    function estimateTravelTime(distanceKm, averageSpeedKmh = 50) {
-        const timeHours = distanceKm / averageSpeedKmh;
-        const timeMinutes = timeHours * 60;
-        return Math.ceil(timeMinutes); // Round up to the nearest minute
-    }
-
-    async function getCoordinates(address) {
-        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
-        const data = await response.json();
-        if (data.length === 0) return null;
-        return [parseFloat(data[0].lat), parseFloat(data[0].lon)]; // [latitude, longitude]
-    }
-
-    async function calculateTimeAndDistance() {
-        const origin = document.getElementById("location").value.trim();
-        const destination = document.getElementById("destination").value.trim();
-        const output = document.getElementById("distance-time");
-        const submitButton = document.getElementById("submit-btn");
-
-        if (!origin || !destination) {
-            output.innerHTML = "<span style='color: red;'>Please enter both location and destination.</span>";
-            submitButton.disabled = true;
-            return;
+            flex: 1;
+            height: 400px;
+            min-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
         }
 
-        const originCoords = await getCoordinates(origin);
-        const destinationCoords = await getCoordinates(destination);
-
-        if (!originCoords || !destinationCoords) {
-            output.innerHTML = "<span style='color: red;'>Invalid address. Try again.</span>";
-            submitButton.disabled = true;
-            return;
-        }
-
-        // Calculate distance using Haversine formula
-        const distanceKm = haversineDistance(
-            originCoords[0], originCoords[1], // Origin latitude and longitude
-            destinationCoords[0], destinationCoords[1] // Destination latitude and longitude
-        );
-
-        // Estimate travel time
-        const timeMinutes = estimateTravelTime(distanceKm);
-
-        // Display results
-        output.innerHTML = `
-            <strong>Estimated Distance:</strong> ${distanceKm.toFixed(1)} km <br>
-            <strong>Estimated Time:</strong> ${timeMinutes} mins
-        `;
-
-        // Update the map
-        updateMap(originCoords, destinationCoords);
-
-        submitButton.disabled = false; // Enable submission
-    }
-
-    // Function to update the map with origin and destination markers
-    function updateMap(originCoords, destinationCoords) {
-        // Clear existing markers and layers
-        map.eachLayer((layer) => {
-            if (layer instanceof L.Marker || layer instanceof L.Polyline) {
-                map.removeLayer(layer);
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
             }
-        });
 
-        // Add markers for origin and destination
-        const originMarker = L.marker([originCoords[0], originCoords[1]]).addTo(map);
-        const destinationMarker = L.marker([destinationCoords[0], destinationCoords[1]]).addTo(map);
+            #map {
+                width: 100%;
+                height: 300px;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="contact-form">
+            <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
+                <div class="form-field">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-field">
+                    <label for="email">Your email</label>
+                    <input id="email" type="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-field">
+                    <label for="phone">Your phone number</label>
+                    <input id="phone" type="text" name="phone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-field">
+                    <label for="location">Your Location</label>
+                    <input id="location" type="text" name="location" placeholder="Write your address" required>
+                </div>
+                <div class="form-field">
+                    <label for="destination">Destination</label>
+                    <input id="destination" type="text" name="destination" placeholder="Write your destination" required>
+                </div>
+                <div class="form-field">
+                    <p id="distance-time"></p>
+                </div>
+                <div class="form-field">
+                    <label for="date">Pickup Date</label>
+                    <input id="date" type="date" name="date" required>
+                </div>
+                <div class="form-field">
+                    <label for="pickup-time">Pickup Time</label>
+                    <select id="pickup-time" name="pickup-time" required>
+                        <option value="" disabled selected>Select a time</option>
+                    </select>
+                </div>
+                <button type="button" id="calculate-btn">Calculate Time & Distance</button>
+                <button type="submit" id="submit-btn" disabled>Send Message</button>
+            </form>
+        </div>
+        <!-- Map Container -->
+        <div id="map"></div>
+    </div>
 
-        // Add a polyline to connect the two points
-        const polyline = L.polyline([
-            [originCoords[0], originCoords[1]],
-            [destinationCoords[0], destinationCoords[1]]
-        ], { color: 'blue' }).addTo(map);
+    <script>
+        // Initialize the map centered on Chicago
+        const map = L.map('map').setView([41.8781, -87.6298], 10); // Chicago coordinates and zoom level
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
 
-        // Fit the map to show both markers
-        const bounds = L.latLngBounds([originCoords[0], originCoords[1]], [destinationCoords[0], destinationCoords[1]]);
-        map.fitBounds(bounds);
-    }
+        // Function to generate time options for the pickup time dropdown
+        function generateTimeOptions() {
+            const pickupTimeSelect = document.getElementById('pickup-time');
+            pickupTimeSelect.innerHTML = '<option value="" disabled selected>Select a time</option>'; // Reset options
 
-    function generateTimeOptions() {
-        const pickupTimeSelect = document.getElementById('pickup-time');
-        pickupTimeSelect.innerHTML = '<option value="" disabled selected>Select a time</option>'; // Reset options
+            let startTime = new Date();
+            startTime.setHours(0, 0, 0, 0); // Start at midnight
 
-        let startTime = new Date();
-        startTime.setHours(0, 0, 0, 0); // Start at midnight
+            for (let i = 0; i < 96; i++) { // 96 intervals of 15 min in 24 hours
+                const timeString = startTime.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                });
 
-        for (let i = 0; i < 96; i++) { // 96 intervals of 15 min in 24 hours
-            const timeString = startTime.toLocaleTimeString([], { 
-                hour: '2-digit', 
-                minute: '2-digit', 
-                hour12: true 
+                const option = document.createElement('option');
+                option.value = timeString;
+                option.textContent = timeString;
+                pickupTimeSelect.appendChild(option);
+
+                startTime.setMinutes(startTime.getMinutes() + 15); // Increment by 15 minutes
+            }
+        }
+
+        // Function to get coordinates using OpenStreetMap Nominatim
+        async function getCoordinates(address) {
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+            const data = await response.json();
+            if (data.length === 0) return null;
+            return [parseFloat(data[0].lat), parseFloat(data[0].lon)]; // [latitude, longitude]
+        }
+
+        // Function to calculate distance and time using OpenRouteService API
+        async function calculateTimeAndDistance() {
+            const origin = document.getElementById("location").value.trim();
+            const destination = document.getElementById("destination").value.trim();
+            const output = document.getElementById("distance-time");
+            const submitButton = document.getElementById("submit-btn");
+
+            if (!origin || !destination) {
+                output.innerHTML = "<span style='color: red;'>Please enter both location and destination.</span>";
+                submitButton.disabled = true;
+                return;
+            }
+
+            const originCoords = await getCoordinates(origin);
+            const destinationCoords = await getCoordinates(destination);
+
+            if (!originCoords || !destinationCoords) {
+                output.innerHTML = "<span style='color: red;'>Invalid address. Try again.</span>";
+                submitButton.disabled = true;
+                return;
+            }
+
+            // Use OpenRouteService API to calculate distance and time
+            const apiKey = 'YOUR_OPENROUTESERVICE_API_KEY'; // Replace with your API key
+            const apiUrl = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${apiKey}&start=${originCoords[1]},${originCoords[0]}&end=${destinationCoords[1]},${destinationCoords[0]}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data.features && data.features.length > 0) {
+                    const distanceKm = (data.features[0].properties.segments[0].distance / 1000).toFixed(1); // Distance in km
+                    const timeMinutes = Math.ceil(data.features[0].properties.segments[0].duration / 60); // Duration in minutes
+
+                    // Display results
+                    output.innerHTML = `
+                        <strong>Estimated Distance:</strong> ${distanceKm} km <br>
+                        <strong>Estimated Time:</strong> ${timeMinutes} mins
+                    `;
+
+                    // Update the map
+                    updateMap(originCoords, destinationCoords, data.features[0].geometry.coordinates);
+
+                    submitButton.disabled = false; // Enable submission
+                } else {
+                    throw new Error('No route found.');
+                }
+            } catch (error) {
+                console.error(error);
+                output.innerHTML = "<span style='color: red;'>Error calculating distance and time. Please try again later.</span>";
+                submitButton.disabled = true;
+            }
+        }
+
+        // Function to update the map with origin, destination, and route
+        function updateMap(originCoords, destinationCoords, routeCoords) {
+            // Clear existing markers and layers
+            map.eachLayer((layer) => {
+                if (layer instanceof L.Marker || layer instanceof L.Polyline) {
+                    map.removeLayer(layer);
+                }
             });
 
-            const option = document.createElement('option');
-            option.value = timeString;
-            option.textContent = timeString;
-            pickupTimeSelect.appendChild(option);
+            // Add markers for origin and destination
+            const originMarker = L.marker([originCoords[0], originCoords[1]]).addTo(map);
+            const destinationMarker = L.marker([destinationCoords[0], destinationCoords[1]]).addTo(map);
 
-            startTime.setMinutes(startTime.getMinutes() + 15); // Increment by 15 minutes
+            // Add a polyline to show the route
+            const polyline = L.polyline(routeCoords.map(coord => [coord[1], coord[0]]), { color: 'blue' }).addTo(map);
+
+            // Fit the map to show both markers and the route
+            const bounds = L.latLngBounds([originCoords[0], originCoords[1]], [destinationCoords[0], destinationCoords[1]]);
+            map.fitBounds(bounds);
         }
-    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        generateTimeOptions();
-        document.getElementById("calculate-btn").addEventListener("click", calculateTimeAndDistance);
-    });
-</script>
+        // Event listener for the calculate button
+        document.addEventListener('DOMContentLoaded', () => {
+            generateTimeOptions();
+            document.getElementById("calculate-btn").addEventListener("click", calculateTimeAndDistance);
+        });
+    </script>
+</body>
+</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
