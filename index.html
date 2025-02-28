@@ -508,8 +508,9 @@ American luxury and reliability.</p>
     <!-- Modal for Images -->
     <div id="imgModal" class="w3-modal" onclick="closeModal()">
         <span class="w3-button w3-display-topright w3-xxlarge w3-hover-opacity" onclick="closeModal()">&times;</span>
-        <div class="w3-modal-content w3-animate-zoom">
-            <img id="img01" class="w3-round" style="width:100%">
+        <div class="w3-modal-content w3-animate-zoom popup">
+            <img id="img01" class="w3-round" style="width:100%" onclick="changeText()">
+            <p id="popupText" style="text-align:center; color:white;">Click to change text</p>
         </div>
     </div>
 
@@ -581,8 +582,26 @@ American luxury and reliability.</p>
         .contact-info-container p {
             color: #ccc;
         }
+        .popup {
+            animation: fadeInScale 0.3s ease-in-out;
+        }
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script>
+        function changeText() {
+            document.getElementById('popupText').textContent = "New text added!";
+        }
+    </script>
 </head>
 <!DOCTYPE html>
 <html lang="en">
