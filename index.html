@@ -295,6 +295,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services Section</title>
     <style>
+        /* General Styles */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -343,15 +344,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.8);
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
 
         .modal-content {
-            background-color: black;
-            color: white;
+            background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             max-width: 600px;
@@ -373,20 +373,61 @@
 
         .modal-content p {
             font-size: 16px;
+            color: #333;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #000;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .service-item {
+                width: 48%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .service-item {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <section class="services-section">
-        <div class="service-item" onclick="openModal('image1.jpg', 'BEST QUALITY', 'First-Class Experience')">
-            <img src="image1.jpg" alt="Premium Quality">
+        <!-- Service Items -->
+        <div class="service-item" onclick="openModal('images/2020-Cadillac-XT6-Midnight-Edition-–-exterior-004-rear-three-quarters 2.jpg', 'BEST QUALITY', 'Where Every Ride is a First-Class Experience')">
+            <img src="images/2020-Cadillac-XT6-Midnight-Edition-–-exterior-004-rear-three-quarters 2.jpg" alt="Premium Quality">
             <h2>BEST QUALITY</h2>
-            <p>First-Class Experience</p>
+            <p>Where Every Ride is a First-Class Experience</p>
+        </div>
+        <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_premium-luxury_edetail_oem_1_815x543.jpg.avif', 'LICENSE & INSURANCE', 'Fully Licensed and Insured for Your Peace of Mind')">
+            <img src="images/2021_cadillac_xt6_4dr-suv_premium-luxury_edetail_oem_1_815x543.jpg.avif" alt="License & Insurance">
+            <h2>LICENSE & INSURANCE</h2>
+            <p>Fully Licensed and Insured for Your Peace of Mind</p>
+        </div>
+        <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_premium-luxury_rbdg_oem_1_815x543.jpg', 'PROFESSIONAL CHAUFFEURS', 'Driven by Certified Professionals, Committed to Excellence')">
+            <img src="images/2021_cadillac_xt6_4dr-suv_premium-luxury_rbdg_oem_1_815x543.jpg" alt="Certified Chauffeurs">
+            <h2>PROFESSIONAL CHAUFFEURS</h2>
+            <p>Driven by Certified Professionals, Committed to Excellence</p>
+        </div>
+        <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_sport_rps_izmo_1_815x543.jpg', 'DIFFERENT SERVICE', 'Comprehensive Luxury Services Tailored to Your Every Need-Private Rides | Corporate Travel | Special Events')">
+            <img src="images/2021_cadillac_xt6_4dr-suv_sport_rps_izmo_1_815x543.jpg" alt="Range of Service">
+            <h2>DIFFERENT SERVICE</h2>
+            <p>Comprehensive Luxury Services Tailored to Your Every Need-Private Rides | Corporate Travel | Special Events</p>
         </div>
     </section>
 
-    <div id="myModal" class="modal" onclick="closeModal(event)">
+    <!-- Modal -->
+    <div id="myModal" class="modal">
         <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
             <img id="modalImage" src="" alt="Modal Image">
             <h2 id="modalTitle"></h2>
             <p id="modalText"></p>
@@ -394,25 +435,35 @@
     </div>
 
     <script>
+        // Function to open the modal
         function openModal(imageSrc, title, text) {
             const modal = document.getElementById('myModal');
-            document.getElementById('modalImage').src = imageSrc;
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalText').textContent = text;
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalText = document.getElementById('modalText');
+
+            modalImage.src = imageSrc;
+            modalTitle.textContent = title;
+            modalText.textContent = text;
             modal.style.display = 'flex';
         }
 
-        function closeModal(event) {
+        // Function to close the modal
+        function closeModal() {
+            const modal = document.getElementById('myModal');
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside the modal content
+        window.onclick = function(event) {
             const modal = document.getElementById('myModal');
             if (event.target === modal) {
                 modal.style.display = 'none';
             }
-        }
+        };
     </script>
 </body>
 </html>
-
-
     <!-- About Section -->
 <div class="w3-content w3-container w3-padding-64" id="about" style="background-color: black; color: white; border: 1px solid #444; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
     <h3 class="w3-center font-courgette" style="color: white;">Luxury Car in Chicago</h3>
