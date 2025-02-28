@@ -344,20 +344,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
 
         .modal-content {
-            background-color: #fff;
+            background-color: #000; /* Black background for modal content */
             padding: 20px;
             border-radius: 8px;
             max-width: 600px;
             width: 90%;
             text-align: center;
             position: relative;
+            color: #fff; /* White text for contrast */
         }
 
         .modal-content img {
@@ -369,11 +370,12 @@
         .modal-content h2 {
             font-size: 24px;
             margin: 15px 0;
+            color: #fff; /* White text */
         }
 
         .modal-content p {
             font-size: 16px;
-            color: #333;
+            color: #ccc; /* Light gray text */
         }
 
         .close {
@@ -382,7 +384,7 @@
             right: 15px;
             font-size: 24px;
             cursor: pointer;
-            color: #000;
+            color: #fff; /* White close button */
         }
 
         /* Responsive Styles */
@@ -425,8 +427,8 @@
     </section>
 
     <!-- Modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close" onclick="closeModal()">&times;</span>
             <img id="modalImage" src="" alt="Modal Image">
             <h2 id="modalTitle"></h2>
@@ -458,7 +460,7 @@
         window.onclick = function(event) {
             const modal = document.getElementById('myModal');
             if (event.target === modal) {
-                modal.style.display = 'none';
+                closeModal();
             }
         };
     </script>
