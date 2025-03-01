@@ -9,15 +9,49 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="stylistic.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <style>
+        /* Ensure the video covers the full width and is responsive */
+        video {
+            width: 100%;
+            height: auto;
+            max-height: 600px; /* Adjust as needed */
+            object-fit: cover; /* Ensures the video covers the entire area */
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body style="background-color: black;">
-    <!-- Middle Banner with Purple Background -->
-    <div class="proposal-banner">
-        <h1>Book Your Car Now</h1>
+    <!-- Video Banner -->
+    <div class="video-container">
+        <video autoplay loop muted playsinline>
+            <source src="images/IMG_3957.MP4" type="video/mp4">
+            <source src="images/IMG_3957.MP4" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay">
+            <h1>Book Your Car Now</h1>
+        </div>
     </div>
+
+    <!-- Discount Banner -->
     <div class="w3-center" style="background-color: #FF0000 !important; color: white !important; height: 40px; padding-top:10px; line-height: 1.2; margin-top: 50px;">
         <h2 style="margin: 0; font-size: 16px;">Get 20% off when you first try our services</h2>
     </div>
+</body>
+</html>
 
     <!-- Custom Section -->
     <div class="custom-section w3-center" style="margin-top: 0; padding: 0; width: 100%; background-color: black; color: white;">
