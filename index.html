@@ -89,7 +89,15 @@
             }
             video {
                 width: 100%; /* Wider video */
-                height: auto; /* Adjust height automatically */
+                height: 100%; /* Ensure video covers the container */
+            }
+            .video-overlay {
+                top: 50%; /* Center vertically */
+                left: 50%; /* Center horizontally */
+                transform: translate(-50%, -50%); /* Center the text */
+            }
+            .discount-banner {
+                margin-top: 0; /* Remove any gap under the video */
             }
         }
     </style>
