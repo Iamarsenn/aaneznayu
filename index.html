@@ -3,431 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gold Coast Chauffeurs</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        /* Custom CSS for mobile navigation buttons */
-        @media only screen and (max-width: 600px) {
-            #navSmall .w3-button {
-                background-color: black; /* Black background */
-                color: white; /* White text for contrast */
-                width: 100%; /* Full width buttons */
-                text-align: left; /* Align text to the left */
-                padding: 12px 16px; /* Add padding for better touch targets */
-                border-bottom: 1px solid #333; /* Add a subtle border between buttons */
-            }
-
-            #navSmall .w3-button:hover {
-                background-color: #333; /* Slightly lighter black on hover */
-            }
-        }
-    </style>
-    <!-- NAVBAR -->
-    <div class="w3-top">
-        <div class="w3-bar w3-cream" id="myNavbar">
-            <a href="index.html" class="w3-bar-item w3-button w3-center">
-                <i class="fa fa-home w3-margin-right"></i><b>Gold </b> Coast Chauffeurs
-            </a>
-
-            <!-- Hamburger Menu for Mobile -->
-            <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right" 
-               href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
-                <i class="fa fa-bars"></i>
-            </a>
-
-            <!-- Main Navigation Links -->
-            <a href="#info" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
-                <i class="fa fa-info-circle"></i> About
-            </a>
-            <a href="#cars" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
-                <i class="fa fa-th"></i> Cars
-            </a>
-            <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
-                <i class="fa fa-envelope"></i> Contact
-            </a>
-        </div>
-
-        <!-- Mobile Navigation (Hidden by default) -->
-        <div id="navSmall" class="w3-bar-block w3-cream w3-hide w3-hide-large w3-hide-medium">
-            <a href="#about" class="w3-bar-item w3-button">About</a>
-            <a href="#cars" class="w3-bar-item w3-button">Cars</a>
-            <a href="#contact" class="w3-bar-item w3-button">Contact</a>
-        </div>
-    </div>
-
-    <script>
-        // JavaScript to toggle mobile navigation
-        function toggleFunction() {
-            var x = document.getElementById("navSmall");
-            if (x.className.indexOf("w3-show") == -1) {
-                x.className += " w3-show";
-            } else {
-                x.className = x.className.replace(" w3-show", "");
-            }
-        }
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gold Coast Chauffeurs</title>
-    <style>
-        /* Video container to cover the full viewport */
-        .video-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh; /* Full height on desktop */
-            overflow: hidden;
-        }
-
-        /* Video styling */
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures the video covers the entire area */
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1; /* Ensures the video stays behind other content */
-        }
-
-        /* Overlay text */
-        .video-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            text-align: center;
-            z-index: 1;
-        }
-
-        /* Responsive Styles for Mobile */
-        @media (max-width: 768px) {
-            .video-container {
-                height: 50vh; /* Shorter height for mobile */
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Video Banner -->
-    <div class="video-container">
-        <video autoplay loop muted playsinline>
-            <source src="images/IMG_3957.MP4" type="video/mp4">
-            <!-- Add a WebM version if available -->
-            <!-- <source src="images/IMG_3957.webm" type="video/webm"> -->
-            Your browser does not support the video tag.
-        </video>
-        <div class="video-overlay">
-            <h1>Book Your Car Now</h1>
-        </div>
-    </div>
-</body>
-</html>
-
-    <!-- Discount Banner -->
-    <div class="w3-center" style="background-color: #FF0000 !important; color: white !important; height: 40px; padding-top:10px; line-height: 1.2; margin-top: 50px;">
-        <h2 style="margin: 0; font-size: 16px;">Get 20% off when you first try our services</h2>
-    </div>
-
-    <!-- Custom Section -->
-    <div class="custom-section w3-center" id="info">
-        <h2>BOOK YOUR PREMIUM CAR NOW</h2>
-        <p>WELCOME TO GOLD COAST CHAUFFEURS - YOUR PERFECT PARTNER FOR AN UNFORGETTABLE RIDE</p>
-        <a href="#contact">
-            <button class="w3-button w3-black">BOOK YOUR RIDE NOW</button>
-        </a>
-    </div>
-
-    <script>
-        function toggleFunction() {
-            var x = document.getElementById("navSmall");
-            if (x.classList.contains("w3-show")) {
-                x.classList.remove("w3-show");
-            } else {
-                x.classList.add("w3-show");
-            }
-        }
-    </script>
-<body style="background-color: black;">
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services Section</title>
-    <style>
-        /* General Styles */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .services-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
-        }
-
-        .service-item {
-            text-align: center;
-            width: 23%;
-            margin-bottom: 20px;
-            cursor: pointer;
-        }
-
-        .service-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .service-item img:hover {
-            transform: scale(1.05);
-        }
-
-        .service-item h2 {
-            font-size: 20px;
-            margin: 10px 0;
-        }
-
-        .service-item p {
-            font-size: 14px;
-            color: #555;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background-color: #000; /* Black background for modal content */
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 600px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-            color: #fff; /* White text for contrast */
-        }
-
-        .modal-content img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .modal-content h2 {
-            font-size: 24px;
-            margin: 15px 0;
-            color: #fff; /* White text */
-        }
-
-        .modal-content p {
-            font-size: 16px;
-            color: #ccc; /* Light gray text */
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #fff; /* White close button */
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .service-item {
-                width: 48%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .service-item {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-    <section class="services-section">
-        <!-- Service Items -->
-        <div class="service-item" onclick="openModal('images/2020-Cadillac-XT6-Midnight-Edition-–-exterior-004-rear-three-quarters 2.jpg', 'BEST QUALITY', 'Where Every Ride is a First-Class Experience')" >
-            <img src="images/2020-Cadillac-XT6-Midnight-Edition-–-exterior-004-rear-three-quarters 2.jpg" alt="Premium Quality">
-            <h2>Elite Fleet</h2>
-            <p>Travel in sophistication with iconic American luxury—Cadillac, Lincoln, and premium sedans, all impeccably maintained.</p>
-        </div>
-        <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_premium-luxury_edetail_oem_1_815x543.jpg.avif', 'LICENSE & INSURANCE', 'Fully Licensed and Insured for Your Peace of Mind')">
-            <img src="images/2021_cadillac_xt6_4dr-suv_premium-luxury_edetail_oem_1_815x543.jpg.avif" alt="License & Insurance">
-            <h2>Professional Chauffeurs</h2>
-            <p>Courteous, licensed, and background-checked drivers with expert knowledge of Illinois roads.</p>
-        </div>
-        <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_premium-luxury_rbdg_oem_1_815x543.jpg', 'PROFESSIONAL CHAUFFEURS', 'Driven by Certified Professionals, Committed to Excellence')">
-            <img src="images/2021_cadillac_xt6_4dr-suv_premium-luxury_rbdg_oem_1_815x543.jpg" alt="Certified Chauffeurs">
-            <h2>Punctuality Guaranteed</h2>
-            <p>We value your schedule—your ride arrives on time, every time.</p>
-        </div>
-        <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_sport_rps_izmo_1_815x543.jpg', 'DIFFERENT SERVICE', 'Comprehensive Luxury Services Tailored to Your Every Need-Private Rides | Corporate Travel | Special Events')">
-            <img src="images/2021_cadillac_xt6_4dr-suv_sport_rps_izmo_1_815x543.jpg" alt="Range of Service">
-            <h2>Safety First</h2>
-            <p>Vehicles undergo rigorous inspections, and routes are optimized for efficiency and your preferences.</p>
-        </div>
-    </section>
-
-    <!-- Modal -->
-    <div id="myModal" class="modal" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <img id="modalImage" src="" alt="Modal Image">
-            <h2 id="modalTitle"></h2>
-            <p id="modalText"></p>
-        </div>
-    </div>
-
-    <script>
-        // Function to open the modal
-        function openModal(imageSrc, title, text) {
-            const modal = document.getElementById('myModal');
-            const modalImage = document.getElementById('modalImage');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalText = document.getElementById('modalText');
-
-            modalImage.src = imageSrc;
-            modalTitle.textContent = title;
-            modalText.textContent = text;
-            modal.style.display = 'flex';
-        }
-
-        // Function to close the modal
-        function closeModal() {
-            const modal = document.getElementById('myModal');
-            modal.style.display = 'none';
-        }
-
-        // Close modal when clicking outside the modal content
-        window.onclick = function(event) {
-            const modal = document.getElementById('myModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        };
-    </script>
-</body>
-</html>
-    <!-- About Section -->
-<div class="w3-content w3-container w3-padding-64" id="about" style="background-color: black; color: white; border: 1px solid #444; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-    <h3 class="w3-center font-courgette" style="color: white;">Luxury Car in Chicago</h3>
-    <p style="color: white;">Welcome to Gold Coast Chauffeurs. Your Comfort, Our Commitment. Upgrade your travel experience-choose classic
-American luxury and reliability.</p>
-    <p style="color: white;">Looking for a luxury ride for your next trip? Whether you're heading to O'Hare, Midway, a private event, or a business meeting, we've got you covered. Travel in style with our business-class chauffeur service, designed for comfort, reliability, and professionalism.</p>
-</div>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Form with Map</title>
     <!-- Leaflet CSS and JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <!-- Custom CSS -->
     <style>
-        /* General container styling */
         .container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            padding: 20px;
         }
 
-        /* Contact form styling */
         .contact-form {
             flex: 1;
             min-width: 300px;
         }
 
-        /* Map container styling */
         #map {
             flex: 1;
-            height: 400px; /* Fixed height for desktop */
+            height: 400px;
             min-width: 300px;
             border: 1px solid #ccc;
             border-radius: 8px;
         }
 
-        /* Responsive styles for mobile */
         @media (max-width: 768px) {
             .container {
-                flex-direction: column; /* Stack elements vertically on mobile */
+                flex-direction: column;
             }
 
             #map {
-                width: 100%; /* Full width on mobile */
-                height: 300px; /* Smaller height for mobile */
-                margin-top: 20px; /* Add spacing between form and map */
+                width: 100%;
+                height: 300px;
+                margin-top: 20px;
             }
-        }
-
-        /* Form field styling */
-        .form-field {
-            margin-bottom: 15px;
-        }
-
-        .form-field label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-field input,
-        .form-field select,
-        .form-field textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .form-field button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #000;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .form-field button:hover {
-            background-color: #333; /* Slightly lighter black on hover */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Contact Form -->
         <div class="contact-form">
             <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
                 <div class="form-field">
@@ -467,7 +82,6 @@ American luxury and reliability.</p>
                 <button type="submit" id="submit-btn" disabled>Send Message</button>
             </form>
         </div>
-
         <!-- Map Container -->
         <div id="map"></div>
     </div>
@@ -644,7 +258,6 @@ American luxury and reliability.</p>
         });
     </script>
 </body>
-</html>
    <!-- Our Cars Section -->
 <div class="bgimg-2 w3-display-container w3-opacity-min" id="cars">
     <div class="w3-display-middle" style="text-align: center; width: 100%;">
