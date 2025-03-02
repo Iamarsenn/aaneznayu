@@ -353,40 +353,81 @@ American luxury and reliability.</p>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <!-- Custom CSS -->
     <style>
+        /* General container styling */
         .container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            padding: 20px;
         }
 
+        /* Contact form styling */
         .contact-form {
             flex: 1;
             min-width: 300px;
         }
 
+        /* Map container styling */
         #map {
             flex: 1;
-            height: 400px;
+            height: 400px; /* Fixed height for desktop */
             min-width: 300px;
             border: 1px solid #ccc;
             border-radius: 8px;
         }
 
+        /* Responsive styles for mobile */
         @media (max-width: 768px) {
             .container {
-                flex-direction: column;
+                flex-direction: column; /* Stack elements vertically on mobile */
             }
 
             #map {
-                width: 100%;
-                height: 300px;
-                margin-top: 20px;
+                width: 100%; /* Full width on mobile */
+                height: 300px; /* Smaller height for mobile */
+                margin-top: 20px; /* Add spacing between form and map */
             }
+        }
+
+        /* Form field styling */
+        .form-field {
+            margin-bottom: 15px;
+        }
+
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-field button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-field button:hover {
+            background-color: #333; /* Slightly lighter black on hover */
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Contact Form -->
         <div class="contact-form">
             <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
                 <div class="form-field">
@@ -426,6 +467,7 @@ American luxury and reliability.</p>
                 <button type="submit" id="submit-btn" disabled>Send Message</button>
             </form>
         </div>
+
         <!-- Map Container -->
         <div id="map"></div>
     </div>
@@ -602,7 +644,7 @@ American luxury and reliability.</p>
         });
     </script>
 </body>
-
+</html>
    <!-- Our Cars Section -->
 <div class="bgimg-2 w3-display-container w3-opacity-min" id="cars">
     <div class="w3-display-middle" style="text-align: center; width: 100%;">
