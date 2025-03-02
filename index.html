@@ -141,6 +141,101 @@
     </div>
 
     <!-- Map and Contact Form Container -->
+    <div class="map-contact-container" id="contact">
+        <!-- Map Container -->
+        <div class="map-container" id="map"></div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <form action="/submit_form" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to toggle mobile navigation
+        function toggleFunction() {
+            var x = document.getElementById("navSmall");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+
+        // Initialize Leaflet Map
+        function initMap() {
+            // Coordinates for Chicago
+            const chicago = [41.8781, -87.6298];
+
+            // Create the map
+            const map = L.map('map').setView(chicago, 12); // Set initial view to Chicago
+
+            // Add a tile layer (OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Add a marker for Chicago
+            L.marker(chicago).addTo(map)
+                .bindPopup('Chicago, IL')
+                .openPopup();
+        }
+
+        // Initialize the map when the page loads
+        window.onload = initMap;
+    </script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</body>
+</html>
+    <!-- NAVBAR -->
+    <div class="w3-top">
+        <div class="w3-bar w3-cream" id="myNavbar">
+            <a href="index.html" class="w3-bar-item w3-button w3-center">
+                <i class="fa fa-home w3-margin-right"></i><b>Gold </b> Coast Chauffeurs
+            </a>
+
+            <!-- Hamburger Menu for Mobile -->
+            <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right" 
+               href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+                <i class="fa fa-bars"></i>
+            </a>
+
+            <!-- Main Navigation Links -->
+            <a href="#info" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
+                <i class="fa fa-info-circle"></i> About
+            </a>
+            <a href="#cars" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
+                <i class="fa fa-th"></i> Cars
+            </a>
+            <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
+                <i class="fa fa-envelope"></i> Contact
+            </a>
+        </div>
+
+        <!-- Mobile Navigation (Hidden by default) -->
+        <div id="navSmall" class="w3-bar-block w3-cream w3-hide w3-hide-large w3-hide-medium">
+            <a href="#about" class="w3-bar-item w3-button">About</a>
+            <a href="#cars" class="w3-bar-item w3-button">Cars</a>
+            <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+        </div>
+    </div>
+
+    <!-- Map and Contact Form Container -->
     <div class="map-contact-container">
         <!-- Map Container -->
         <div class="map-container" id="map"></div>
