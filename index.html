@@ -12,6 +12,9 @@
         /* Ensure consistent background color */
         body {
             background-color: black !important;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
         }
 
         /* Fix home button movement */
@@ -19,16 +22,84 @@
             padding: 8px 16px !important; /* Consistent padding */
         }
 
-        /* Map Container Styling */
-        .map-container {
-            width: 100%; /* Full width */
-            height: 400px; /* Fixed height for the map */
+        /* Map and Contact Form Container */
+        .map-contact-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
             margin-top: 80px; /* Adjust based on navbar height */
+            padding: 20px;
+            gap: 20px; /* Space between map and contact form */
+        }
+
+        /* Map Container */
+        .map-container {
+            flex: 1; /* Take up available space */
+            min-width: 300px; /* Minimum width for the map */
+            height: 400px; /* Fixed height for the map */
             background-color: #ccc; /* Fallback background */
         }
 
+        /* Contact Form Container */
+        .contact-form {
+            flex: 1; /* Take up available space */
+            min-width: 300px; /* Minimum width for the contact form */
+            background-color: #fff; /* White background for the form */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contact Form Styling */
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form input[type="date"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .contact-form textarea {
+            resize: vertical; /* Allow vertical resizing */
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #333; /* Slightly lighter black on hover */
+        }
+
         /* Responsive Styles for Mobile */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .map-contact-container {
+                flex-direction: column; /* Stack map and contact form vertically */
+            }
+
+            .map-container,
+            .contact-form {
+                min-width: 100%; /* Full width on mobile */
+            }
+
             .map-container {
                 height: 300px; /* Smaller height for mobile */
             }
@@ -69,8 +140,30 @@
         </div>
     </div>
 
-    <!-- Map Container -->
-    <div class="map-container" id="map"></div>
+    <!-- Map and Contact Form Container -->
+    <div class="map-contact-container">
+        <!-- Map Container -->
+        <div class="map-container" id="map"></div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <form action="/submit_form" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
 
     <script>
         // JavaScript to toggle mobile navigation
