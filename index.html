@@ -970,6 +970,19 @@ American luxury and reliability.</p>
             line-height: 1.6;
         }
 
+        /* Instagram Logo Styling */
+        .ig-logo {
+            color: #fff; /* White color for the icon */
+            text-decoration: none; /* Remove underline */
+            font-size: 24px; /* Icon size */
+            display: inline-block; /* Ensure it behaves like a block element */
+            margin-top: 10px; /* Add some spacing above the icon */
+        }
+
+        .ig-logo:hover {
+            color: #e4405f; /* Instagram brand color on hover */
+        }
+
         /* Responsive Styles for Mobile */
         @media (max-width: 600px) {
             .container {
@@ -979,6 +992,8 @@ American luxury and reliability.</p>
 
             .contact-info-container {
                 padding: 15px;
+                width: 100%; /* Ensure the container takes full width */
+                box-sizing: border-box; /* Include padding in the width calculation */
             }
 
             h3 {
@@ -991,20 +1006,26 @@ American luxury and reliability.</p>
 
             p {
                 font-size: 14px;
+                width: 100%; /* Ensure text takes full width */
             }
         }
     </style>
+    <!-- Font Awesome for Instagram Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="container" id="contact">
-<!-- Contact Information Text -->
-<div class="contact-info-container">
-    <h3>Better yet, see us in person!</h3>
-    <p>Do you have any questions or feedback about the event? Do you require any special arrangements? Feel free to reach out, and I’ll respond to you promptly.</p>
-    <h4>Gold Coast Chauffeurs</h4>
-    <h4>Contact: abtkrv@gmail.com</h4>
-    <!-- Instagram Logo with Link -->
-    <a href="https://www.instagram.com/gold_coast__chauffeurs?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="ig-logo">
-        <i class="fa fa-instagram"></i> <!-- Font Awesome Instagram Icon -->
-    </a>
-</div>
+        <!-- Contact Information Text -->
+        <div class="contact-info-container">
+            <h3>Better yet, see us in person!</h3>
+            <p>Do you have any questions or feedback about the event? Do you require any special arrangements? Feel free to reach out, and I’ll respond to you promptly.</p>
+            <h4>Gold Coast Chauffeurs</h4>
+            <h4>Contact: abtkrv@gmail.com</h4>
+            <!-- Instagram Logo with Link -->
+            <a href="https://www.instagram.com/gold_coast__chauffeurs?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="ig-logo">
+                <i class="fa fa-instagram"></i> <!-- Font Awesome Instagram Icon -->
+            </a>
+        </div>
+    </div>
+</body>
+</html>
