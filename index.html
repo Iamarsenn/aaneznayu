@@ -644,10 +644,12 @@ American luxury and reliability.</p>
         }
 
         // Event listener for the calculate button
-        document.addEventListener('DOMContentLoaded', () => {
-            generateTimeOptions();
-            document.getElementById("calculate-btn").addEventListener("click", calculateTimeAndDistance);
-        });
+        document.addEventListener('DOMContentLoaded', function () {
+    const map = L.map('map').setView([41.8781, -87.6298], 10); // Chicago coordinates
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+});
     </script>
 </body>
 </html>
