@@ -1,186 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Centered Contact Form</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Lobster|Satisfy|Courgette">
-<style>
-    @media (max-width: 600px) {
-        .w3-display-middle {
-            position: relative;
-            top: auto;
-            left: auto;
-            transform: none;
-            text-align: center;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Centered Contact Form</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Lobster|Satisfy|Courgette">
+    <style>
+        /* General Body Styling */
+        body, html {
+            height: 100%;
+            color: #777;
+            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: black;
+        }
+
+        /* Proposal Banner Styling */
+        .proposal-banner {
             width: 100%;
+            padding: 50px 20px;
+            text-align: center;
+            background: url("images/franco-debartolo-SC5dsOBDE5A-unsplash.jpg") center/cover no-repeat;
+            color: white;
+            font-size: 36px;
+            font-family: 'Lobster', cursive;
         }
-    }
-</style>
-<style>
-    /* General Body and HTML Styling */
-    body, html {
-        height: 100%;
-        color: #777;
-        line-height: 1.8;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-    }
 
-    /* Proposal Banner Styling */
-    .proposal-banner {
-        width: 100%;
-        padding: 50px 20px;
-        text-align: center;
-        background: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
-        color: white;
-        font-size: 36px;
-        font-family: 'Lobster', cursive;
-    }
+        /* Parallax Background */
+        .bgimg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 400px;
+        }
+        
+        /* Contact Form Styling */
+        .contact-form {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: black;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
 
-    .proposal-banner {
-        width: 100%;
-        padding: 50px 20px;
-        text-align: center;
-        background: url("images/franco-debartolo-SC5dsOBDE5A-unsplash.jpg") center/cover no-repeat;
-        color: white;
-        font-size: 36px;
-        font-family: 'Lobster', cursive;
-    }
-
-    /* Parallax Background Images */
-    .bgimg-1, .bgimg-2, .bgimg-3 {
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    /* Specific Background Images */
-    .bgimg-1 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 400px; }
-    .bgimg-2 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 400px; }
-    .bgimg-2 { background-image: url("images/franco-debartolo-977uKboNOes-unsplash.jpg"); min-height: 400px; }
-
-
-/* Contact Form Styling */
-.contact-form {
-    max-width: 600px;
-    width: 100%;
-    padding: 20px;
-    margin-bottom: 30px; /* Space beneath the form for other content */
-    background-color: #black; /* Total black background */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow */
-    color: #fff; /* White text for the form */
-}
-img {
-    background: none;
-img {
-    background-color: transparent;
-}
-}
-
-/* Form Element Styling */
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form input[type="date"],
-.contact-form textarea,
-.contact-form select,
-.contact-form button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: 1px solid #444; /* Darker border */
-    border-radius: 5px;
-    font-size: 16px;
-    color: #fff; /* White text for inputs */
-    background-color: #333; /* Dark gray background for inputs */
-}
-
-.contact-form button {
-    background-color: #8B0000; /* red button */
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.contact-form button:hover {
-    background-color: #8B0000; /* Darker green on hover */
-}
-#map {
-    flex: 1;
-    height: 600px;
-    border-radius: 10px;
-    border: 1px solid #555;
-    position: relative; /* Ensures it doesn't affect layout unexpectedly */
-    z-index: 1; /* Make sure it's above other elements */
-}
-
-/* Label Styling */
-.contact-form label {
-    color: #fff; /* White text for labels */
-    font-weight: bold;
-    margin-top: 10px;
-    display: block;
-}
-
-/* Placeholder Styling */
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-    color: #bbb; /* Light gray placeholder text */
-}
-
-/* Label Styling */
-.contact-form label {
-    color: #333; /* Dark text color for labels */
-    font-weight: bold;
-    margin-top: 10px;
-    display: block;
-}
-
-/* Placeholder Styling */
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-    color: #999; /* Light gray placeholder text */
-}
-    }
-
-    /* Form labels */
-    .contact-form label {
-        font-size: 16px;
-        font-weight: bold;
-        color: #333;
-        display: block;
-        margin-top: 20px;
-    }
-
-    /* Responsive Adjustments */
-    @media screen and (max-width: 768px) {
-        .contact-form input[type="text"],
-        .contact-form input[type="email"],
-        .contact-form input[type="date"],
+        /* Form Element Styling */
+        .contact-form input,
         .contact-form textarea,
+        .contact-form select,
         .contact-form button {
-            font-size: 18px;
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #333;
         }
-    }
 
-    /* Parallax Scroll Fix for Mobile */
-    @media only screen and (max-device-width: 1024px) {
-        .bgimg-1, .bgimg-2, .bgimg-3, .bgimg-4, .bgimg-5, .bgimg-6, .bgimg-7, .bgimg-8, .bgimg-9 {
-            background-attachment: scroll;
+        .contact-form button {
+            background-color: #8B0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-    }
 
-    /* Slideshow and Other Content Styles */
-    .mySlides { display: none; }
-    .slideshow-container { position: center; margin: auto; }
-    .dot { height: 15px; width: 15px; background-color: #bbb; border-radius: 50%; display: inline-block; transition: background-color 0.6s ease; }
-    .active { background-color: #717171; }
-</style>
+        .contact-form button:hover {
+            background-color: #600000;
+        }
+
+        /* Label Styling */
+        .contact-form label {
+            color: #fff;
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        /* Placeholder Styling */
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #bbb;
+        }
+
+        /* Responsive Adjustments */
+        @media screen and (max-width: 768px) {
+            .contact-form input,
+            .contact-form textarea,
+            .contact-form button {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -208,7 +127,7 @@ img {
     </form>
 </div>
 
-<!-- Additional Content (below form) -->
+<!-- Additional Content -->
 <div class="additional-content">
     <p>This content appears beneath the contact form.</p>
 </div>
