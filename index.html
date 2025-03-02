@@ -351,127 +351,137 @@ American luxury and reliability.</p>
     <!-- Leaflet CSS and JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-   <!-- Custom CSS -->
-    <style>
-        /* General container styling */
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
-        }
+    <!-- Custom CSS -->
+    <style>
+        /* General container styling */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
 
-        /* Contact form styling */
-        .contact-form {
-            flex: 1;
-            min-width: 300px;
-        }
+        /* Contact form styling */
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
 
-        /* Map container styling */
-        #map {
-            flex: 1;
-            height: 400px; /* Fixed height for desktop */
-            height: 400px;
-            min-width: 300px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
+        /* Map container styling */
+        #map {
+            flex: 1;
+            height: 400px; /* Fixed height for desktop */
+            height: 400px;
+            min-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
 
-        /* Responsive styles for mobile */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column; /* Stack elements vertically on mobile */
-                flex-direction: column;
-            }
+        /* Responsive styles for mobile */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Stack elements vertically on mobile */
+                flex-direction: column;
+            }
 
-            #map {
-                width: 100%; /* Full width on mobile */
-                height: 300px; /* Smaller height for mobile */
-                margin-top: 20px; /* Add spacing between form and map */
-                width: 100%;
-                height: 300px;
-                margin-top: 20px;
-            }
-        }
+            #map {
+                width: 100%; /* Full width on mobile */
+                height: 300px; /* Smaller height for mobile */
+                margin-top: 20px; /* Add spacing between form and map */
+                width: 100%;
+                height: 300px;
+                margin-top: 20px;
+            }
+        }
 
-        /* Form field styling */
-        .form-field {
-            margin-bottom: 15px;
-        }
+        /* Form field styling */
+        .form-field {
+            margin-bottom: 15px;
+        }
 
-        .form-field label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
+        .form-field label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
 
-        .form-field input,
-        .form-field select,
-        .form-field textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
 
-        .form-field button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #000;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+        .form-field button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-        .form-field button:hover {
-            background-color: #333; /* Slightly lighter black on hover */
-        }
-    </style>
+        .form-field button:hover {
+            background-color: #333; /* Slightly lighter black on hover */
+        }
+    </style>
+<head>
+<style>
+  button {
+    border: none;
+    border-radius: 5px; /* Adjust the radius for more or less rounded edges */
+    padding: 10px 20px; /* Adjust padding as needed */
+    cursor: pointer;
+    /* Add any other desired button styling here */
+  }
+</style>
+</head>
 <body>
-    <div class="container">
-        <div class="contact-form">
-            <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
-                <div class="form-field">
-                    <label for="name">Name</label>
-                    <input id="name" type="text" name="name" placeholder="Enter your name" required>
-                </div>
-                <div class="form-field">
-                    <label for="email">Your email</label>
-                    <input id="email" type="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-field">
-                    <label for="phone">Your phone number</label>
-                    <input id="phone" type="text" name="phone" placeholder="Enter your phone number" required>
-                </div>
-                <div class="form-field">
-                    <label for="location">Your Location</label>
-                    <input id="location" type="text" name="location" placeholder="Click on the map to select your location" required readonly>
-                </div>
-                <div class="form-field">
-                    <label for="destination">Destination</label>
-                    <input id="destination" type="text" name="destination" placeholder="Click on the map to select your destination" required readonly>
-                </div>
-                <div class="form-field">
-                    <p id="distance-time"></p>
-                </div>
-                <div class="form-field">
-                    <label for="date">Pickup Date</label>
-                    <input id="date" type="date" name="date" required>
-                </div>
-                <div class="form-field">
-                    <label for="pickup-time">Pickup Time</label>
-                    <select id="pickup-time" name="pickup-time" required>
-                        <option value="" disabled selected>Select a time</option>
-                    </select>
-                </div>
-                <button type="button" id="calculate-btn">Calculate Time & Distance</button>
-                <button type="submit" id="submit-btn" disabled>Send Message</button>
-            </form>
-        </div>
-    </div>
-</body>
+    <div class="container">
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
+                <div class="form-field">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-field">
+                    <label for="email">Your email</label>
+                    <input id="email" type="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-field">
+                    <label for="phone">Your phone number</label>
+                    <input id="phone" type="text" name="phone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-field">
+                    <label for="location">Your Location</label>
+                    <input id="location" type="text" name="location" placeholder="Click on the map to select your location" required readonly>
+                </div>
+                <div class="form-field">
+                    <label for="destination">Destination</label>
+                    <input id="destination" type="text" name="destination" placeholder="Click on the map to select your destination" required readonly>
+                </div>
+                <div class="form-field">
+                    <p id="distance-time"></p>
+                </div>
+                <div class="form-field">
+                    <label for="date">Pickup Date</label>
+                    <input id="date" type="date" name="date" required>
+                </div>
+                <div class="form-field">
+                    <label for="pickup-time">Pickup Time</label>
+                    <select id="pickup-time" name="pickup-time" required>
+                        <option value="" disabled selected>Select a time</option>
+                    </select>
+                </div>
+                <button type="button" id="calculate-btn">Calculate Time & Distance</button>
+                <button type="submit" id="submit-btn" disabled>Send Message</button>
+            </form>
+        </div>
 
         <!-- Map Container -->
         <div id="map"></div>
