@@ -102,6 +102,21 @@
     </style>
 </head>
 <body>
+#map {
+    flex: 1;
+    height: 400px; /* Default height for desktop */
+    min-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f0f0f0; /* Debugging color */
+}
+
+@media (max-width: 768px) {
+    #map {
+        height: 300px; /* Adjusted height for mobile */
+        margin-top: 20px; /* Add spacing between form and map */
+    }
+}
 
 <!-- Proposal Banner -->
 <div class="proposal-banner">
