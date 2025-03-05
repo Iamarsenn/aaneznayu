@@ -180,8 +180,8 @@ document.addEventListener('DOMContentLoaded', function () {
         map.invalidateSize(); // Force Leaflet to recalculate size
     }, 500);
 });
-// Function to generate time options
 function generateTimeOptions() {
+    console.log("Generating time options..."); // Debugging line
     const pickupTimeSelect = document.getElementById('pickup-time');
 
     // Clear existing options (except the first one)
@@ -215,14 +215,8 @@ function generateTimeOptions() {
 
 // Call the function to generate time options when the page loads
 document.addEventListener('DOMContentLoaded', function () {
+    console.log("Page loaded, generating time options..."); // Debugging line
     generateTimeOptions();
-});
-// Get the current time
-const now = new Date();
-const currentTime = now.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true
 });
 
 // Add the "selected" attribute to the current time option
