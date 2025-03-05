@@ -217,3 +217,15 @@ function generateTimeOptions() {
 document.addEventListener('DOMContentLoaded', function () {
     generateTimeOptions();
 });
+// Get the current time
+const now = new Date();
+const currentTime = now.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+});
+
+// Add the "selected" attribute to the current time option
+if (option.value === currentTime) {
+    option.selected = true;
+}
