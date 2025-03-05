@@ -4,6 +4,18 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
+// Recalculate map size on window resize
+window.addEventListener('resize', function () {
+    map.invalidateSize();
+});
+
+// Recalculate map size after the page loads (for mobile)
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+        map.invalidateSize();
+    }, 100); // Small delay to ensure the container is fully rendered
+});
+
 // Variables to store origin and destination coordinates
 let originCoords = null;
 let destinationCoords = null;
