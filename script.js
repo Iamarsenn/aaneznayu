@@ -180,3 +180,40 @@ document.addEventListener('DOMContentLoaded', function () {
         map.invalidateSize(); // Force Leaflet to recalculate size
     }, 500);
 });
+// Function to generate time options
+function generateTimeOptions() {
+    const pickupTimeSelect = document.getElementById('pickup-time');
+
+    // Clear existing options (except the first one)
+    pickupTimeSelect.innerHTML = '<option value="" disabled selected>Select a time</option>';
+
+    // Start time (0:00 AM)
+    let startTime = new Date();
+    startTime.setHours(0, 0, 0, 0); // Set to midnight
+
+    // Loop through 24 hours with 15-minute intervals
+    for (let i = 0; i < 96; i++) { // 96 intervals of 15 minutes in 24 hours
+        // Format the time as HH:MM AM/PM
+        const timeString = startTime.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+        });
+
+        // Create a new <option> element
+        const option = document.createElement('option');
+        option.value = timeString; // Set the value (e.g., "12:00 AM")
+        option.textContent = timeString; // Set the display text (e.g., "12:00 AM")
+
+        // Add the option to the <select> element
+        pickupTimeSelect.appendChild(option);
+
+        // Increment time by 15 minutes
+        startTime.setMinutes(startTime.getMinutes() + 15);
+    }
+}
+
+// Call the function to generate time options when the page loads
+document.addEventListener('DOMContentLoaded', function () {
+    generateTimeOptions();
+});
