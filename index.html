@@ -346,141 +346,173 @@ American luxury and reliability.</p>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form with Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Centered Contact Form with Map</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Lobster|Satisfy|Courgette">
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <style>
-        /* General container styling */
-        .container {
+        /* General Body Styling */
+        body, html {
+            height: 100%;
+            color: #777;
+            line-height: 1.8;
             display: flex;
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        body {
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             background-color: black;
-            color: white;
-            padding: 20px;
         }
-        .form-field {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input, select {
-            background-color: #333;
-            color: white;
-            border: 1px solid #555;
-            padding: 10px;
+
+        /* Proposal Banner Styling */
+        .proposal-banner {
             width: 100%;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #FF0000;
+            padding: 50px 20px;
+            text-align: center;
+            background: url("images/franco-debartolo-SC5dsOBDE5A-unsplash.jpg") center/cover no-repeat;
             color: white;
-            padding: 10px 20px;
+            font-size: 36px;
+            font-family: 'Lobster', cursive;
+        }
+
+        /* Parallax Background */
+        .bgimg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 400px;
+        }
+        
+        /* Contact Form Styling */
+        .contact-form {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: black;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        /* Form Element Styling */
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select,
+        .contact-form button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #333;
+        }
+
+        .contact-form button {
+            background-color: #8B0000;
+            color: white;
             border: none;
             cursor: pointer;
-            margin-right: 10px;
+            transition: background-color 0.3s ease;
         }
-        #map {
-            flex: 1;
-            height: 600px; /* Default height for desktop */
-            border-radius: 10px;
-            border: 1px solid #555;
-            background-color: #f0f0f0; /* Debugging color */
+
+        .contact-form button:hover {
+            background-color: #600000;
         }
+
+        /* Label Styling */
+        .contact-form label {
+            color: #fff;
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        /* Placeholder Styling */
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #bbb;
+        }
+
+        /* Map Container Styling */
+        #mapid {
+            height: 400px; /* Default height for desktop */
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 20px; /* Add spacing between form and map */
+        }
+
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            #map {
+            #mapid {
                 height: 300px; /* Adjusted height for mobile */
             }
         }
-        .contact-info-container {
-            flex: 1;
-            max-width: 48%;
-            padding-left: 20px;
-        }
-        .contact-info-container h3,
-        .contact-info-container h4 {
-            color: white;
-        }
-        .contact-info-container p {
-            color: #ccc;
-        }
-        .popup {
-            animation: fadeInScale 0.3s ease-in-out;
-        }
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
+
+        /* Responsive Adjustments */
+        @media screen and (max-width: 768px) {
+            .contact-form input,
+            .contact-form textarea,
+            .contact-form button {
+                font-size: 18px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Contact Form -->
-        <div class="contact-form">
-            <form id="contact-form" action="https://formspree.io/f/xdkogden" method="POST">
-                <div class="form-field">
-                    <label for="name">Name</label>
-                    <input id="name" type="text" name="name" placeholder="Enter your name" required>
-                </div>
-                <div class="form-field">
-                    <label for="email">Your email</label>
-                    <input id="email" type="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-field">
-                    <label for="phone">Your phone number</label>
-                    <input id="phone" type="text" name="phone" placeholder="Enter your phone number" required>
-                </div>
-                <div class="form-field">
-                    <label for="location">Your Location</label>
-                    <input id="location" type="text" name="location" placeholder="Click on the map to select your location" required readonly>
-                </div>
-                <div class="form-field">
-                    <label for="destination">Destination</label>
-                    <input id="destination" type="text" name="destination" placeholder="Click on the map to select your destination" required readonly>
-                </div>
-                <div class="form-field">
-                    <p id="distance-time"></p>
-                </div>
-                <div class="form-field">
-                    <label for="date">Pickup Date</label>
-                    <input id="date" type="date" name="date" required>
-                </div>
-                <div class="form-field">
-                    <label for="pickup-time">Pickup Time</label>
-                    <select id="pickup-time" name="pickup-time" required>
-                        <option value="" disabled selected>Select a time</option>
-                    </select>
-                </div>
-                <button type="button" id="calculate-btn">Calculate Time & Distance</button>
-                <button type="submit" id="submit-btn" disabled>Send Message</button>
-            </form>
-        </div>
-
-        <!-- Map Container -->
-        <div id="map"></div>
+    <!-- Proposal Banner -->
+    <div class="proposal-banner">
+        <h1>Book Your Car Now</h1>
     </div>
 
+    <!-- Contact Form -->
+    <div class="contact-form">
+        <form action="/submit_form" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date">
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Map Container -->
+    <div id="mapid"></div>
+
     <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- Your External JavaScript File -->
-    <script src="script.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        var mymap = L.map('mapid').setView([51.505, -0.09], 13); // Default coordinates (London)
+
+        // Add a tile layer (OpenStreetMap)
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mymap);
+
+        // Recalculate map size on window resize
+        window.addEventListener('resize', function () {
+            mymap.invalidateSize();
+        });
+
+        // Recalculate map size after the page loads (for mobile)
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                mymap.invalidateSize();
+            }, 100); // Small delay to ensure the container is fully rendered
+        });
+    </script>
 </body>
 </html>
 <!DOCTYPE html>
