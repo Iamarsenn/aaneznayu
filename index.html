@@ -346,175 +346,75 @@ American luxury and reliability.</p>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Centered Contact Form with Map</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Lobster|Satisfy|Courgette">
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form with Map</title>
+    <!-- Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Custom CSS -->
     <style>
-        /* General Body Styling */
-        body, html {
-            height: 100%;
-            color: #777;
-            line-height: 1.8;
+        /* General container styling */
+        .container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background-color: black;
-        }
-
-        /* Proposal Banner Styling */
-        .proposal-banner {
-            width: 100%;
-            padding: 50px 20px;
-            text-align: center;
-            background: url("images/franco-debartolo-SC5dsOBDE5A-unsplash.jpg") center/cover no-repeat;
-            color: white;
-            font-size: 36px;
-            font-family: 'Lobster', cursive;
-        }
-
-        /* Parallax Background */
-        .bgimg {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            min-height: 400px;
-        }
-        
-        /* Contact Form Styling */
-        .contact-form {
-            max-width: 600px;
-            width: 100%;
+            flex-wrap: wrap;
+            gap: 20px;
             padding: 20px;
-            margin-bottom: 30px;
-            background-color: black;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            color: #fff;
         }
 
-        /* Form Element Styling */
-        .contact-form input,
-        .contact-form textarea,
-        .contact-form select,
-        .contact-form button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border: 1px solid #444;
-            border-radius: 5px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #333;
+        /* Contact form styling */
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
         }
 
-        .contact-form button {
-            background-color: #8B0000;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        /* Map container styling */
+#map {
+    flex: 1;
+    height: 400px; /* Fixed height for desktop */
+    min-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    #map {
+        width: 100%; /* Full width on mobile */
+        height: 300px; /* Smaller height for mobile */
+        margin-top: 20px; /* Add spacing between form and map */
+        background-color: #f0f0f0; /* Temporary background color for debugging */
+    }
+}
+
+        /* Form field styling */
+        .form-field {
+            margin-bottom: 15px;
         }
 
-        .contact-form button:hover {
-            background-color: #600000;
-        }
-
-        /* Label Styling */
-        .contact-form label {
-            color: #fff;
-            font-weight: bold;
-            margin-top: 10px;
+        .form-field label {
             display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
 
-        /* Placeholder Styling */
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder {
-            color: #bbb;
-        }
-
-        /* Map Container Styling */
-        #mapid {
-            height: 400px; /* Default height for desktop */
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
             width: 100%;
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 8px;
-            margin-top: 20px; /* Add spacing between form and map */
+            border-radius: 4px;
+            font-size: 16px;
         }
 
-        @media (max-width: 768px) {
-            #mapid {
-                height: 300px; /* Adjusted height for mobile */
-            }
+        .form-field button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
-
-        /* Responsive Adjustments */
-        @media screen and (max-width: 768px) {
-            .contact-form input,
-            .contact-form textarea,
-            .contact-form button {
-                font-size: 18px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Proposal Banner -->
-    <div class="proposal-banner">
-        <h1>Book Your Car Now</h1>
-    </div>
-
-    <!-- Contact Form -->
-    <div class="contact-form">
-        <form action="/submit_form" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date">
-
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-
-    <!-- Map Container -->
-    <div id="mapid"></div>
-
-    <!-- Leaflet JS -->
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-    <script>
-        // Initialize the map
-        var mymap = L.map('mapid').setView([51.505, -0.09], 13); // Default coordinates (London)
-
-        // Add a tile layer (OpenStreetMap)
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(mymap);
-
-        // Recalculate map size on window resize
-        window.addEventListener('resize', function () {
-            mymap.invalidateSize();
-        });
-
-        // Recalculate map size after the page loads (for mobile)
-        document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(function () {
-                mymap.invalidateSize();
-            }, 100); // Small delay to ensure the container is fully rendered
-        });
-    </script>
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
