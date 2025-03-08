@@ -99,7 +99,10 @@
                 font-size: 18px;
             }
         }
-        /* General Styles */
+    </style>
+</head>
+<body>
+/* General Styles */
 .services-section {
     display: flex;
     flex-wrap: wrap;
@@ -150,9 +153,6 @@
         flex: 1 1 100%; /* 1 item per row on small screens */
     }
 }
-    </style>
-</head>
-<body>
 #map {
     flex: 1;
     height: 400px; /* Default height for desktop */
