@@ -272,28 +272,38 @@
 </head>
 <body>
     <section class="services-section">
-        <!-- Service Items -->
-        <div class="service-item" onclick="openModal('images/2020-Cadillac-XT6-Midnight-Edition-–-exterior-004-rear-three-quarters 2.jpg', 'BEST QUALITY', 'Where Every Ride is a First-Class Experience')" >
-            <img src="images/2020-Cadillac-XT6-Midnight-Edition-–-exterior-004-rear-three-quarters 2.jpg" alt="Premium Quality">
-            <h2>Elite Fleet</h2>
-            <p>Travel in sophistication with iconic American luxury—Cadillac, Lincoln, and premium sedans, all impeccably maintained.</p>
-        </div>
-        <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_premium-luxury_edetail_oem_1_815x543.jpg.avif', 'LICENSE & INSURANCE', 'Fully Licensed and Insured for Your Peace of Mind')">
-            <img src="images/2021_cadillac_xt6_4dr-suv_premium-luxury_edetail_oem_1_815x543.jpg.avif" alt="License & Insurance">
-            <h2>Professional Chauffeurs</h2>
-            <p>Courteous, licensed, and background-checked drivers with expert knowledge of Illinois roads.</p>
-        </div>
-        <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_premium-luxury_rbdg_oem_1_815x543.jpg', 'PROFESSIONAL CHAUFFEURS', 'Driven by Certified Professionals, Committed to Excellence')">
-            <img src="images/2021_cadillac_xt6_4dr-suv_premium-luxury_rbdg_oem_1_815x543.jpg" alt="Certified Chauffeurs">
-            <h2>Punctuality Guaranteed</h2>
-            <p>We value your schedule—your ride arrives on time, every time.</p>
-        </div>
-        <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_sport_rps_izmo_1_815x543.jpg', 'DIFFERENT SERVICE', 'Comprehensive Luxury Services Tailored to Your Every Need-Private Rides | Corporate Travel | Special Events')">
-            <img src="images/2021_cadillac_xt6_4dr-suv_sport_rps_izmo_1_815x543.jpg" alt="Range of Service">
-            <h2>Safety First</h2>
-            <p>Vehicles undergo rigorous inspections, and routes are optimized for efficiency and your preferences.</p>
-        </div>
-    </section>
+    <!-- Service Items -->
+    <div class="service-item" onclick="openModal('images/2020-Cadillac-XT6-Midnight-Edition-–-exterior-004-rear-three-quarters 2.jpg', 'Elite Fleet', 'Travel in sophistication with iconic American luxury—Cadillac, Lincoln, and premium sedans, all impeccably maintained.')">
+        <img src="images/2020-Cadillac-XT6-Midnight-Edition-–-exterior-004-rear-three-quarters 2.jpg" alt="Premium Quality">
+        <h2>Elite Fleet</h2>
+        <p>Travel in sophistication with iconic American luxury—Cadillac, Lincoln, and premium sedans, all impeccably maintained.</p>
+    </div>
+    <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_premium-luxury_edetail_oem_1_815x543.jpg.avif', 'Professional Chauffeurs', 'Courteous, licensed, and background-checked drivers with expert knowledge of Illinois roads.')">
+        <img src="images/2021_cadillac_xt6_4dr-suv_premium-luxury_edetail_oem_1_815x543.jpg.avif" alt="License & Insurance">
+        <h2>Professional Chauffeurs</h2>
+        <p>Courteous, licensed, and background-checked drivers with expert knowledge of Illinois roads.</p>
+    </div>
+    <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_premium-luxury_rbdg_oem_1_815x543.jpg', 'Punctuality Guaranteed', 'We value your schedule—your ride arrives on time, every time.')">
+        <img src="images/2021_cadillac_xt6_4dr-suv_premium-luxury_rbdg_oem_1_815x543.jpg" alt="Certified Chauffeurs">
+        <h2>Punctuality Guaranteed</h2>
+        <p>We value your schedule—your ride arrives on time, every time.</p>
+    </div>
+    <div class="service-item" onclick="openModal('images/2021_cadillac_xt6_4dr-suv_sport_rps_izmo_1_815x543.jpg', 'Safety First', 'Vehicles undergo rigorous inspections, and routes are optimized for efficiency and your preferences.')">
+        <img src="images/2021_cadillac_xt6_4dr-suv_sport_rps_izmo_1_815x543.jpg" alt="Range of Service">
+        <h2>Safety First</h2>
+        <p>Vehicles undergo rigorous inspections, and routes are optimized for efficiency and your preferences.</p>
+    </div>
+</section>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modalImage" src="" alt="Modal Image" style="width: 100%;">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+    </div>
+</div>
 
     <!-- Modal -->
     <div id="myModal" class="modal" onclick="closeModal()">
