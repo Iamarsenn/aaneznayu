@@ -99,6 +99,57 @@
                 font-size: 18px;
             }
         }
+        /* General Styles */
+.services-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background-color: #333; /* Dark background for contrast */
+}
+
+.service-item {
+    flex: 1 1 calc(25% - 20px); /* Adjust for 4 items per row */
+    background-color: #444; /* Slightly lighter background */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.service-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Make <h2> text white */
+.service-item h2 {
+    color: white; /* Set text color to white */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    font-size: 24px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the text bold */
+}
+
+.service-item p {
+    color: #ccc; /* Light gray text for description */
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+    .service-item {
+        flex: 1 1 calc(50% - 20px); /* 2 items per row on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .service-item {
+        flex: 1 1 100%; /* 1 item per row on small screens */
+    }
+}
     </style>
 </head>
 <body>
