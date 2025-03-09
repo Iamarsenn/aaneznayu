@@ -458,13 +458,15 @@ American luxury and reliability.</p>
                     <label for="phone">Your phone number</label>
                     <input id="phone" type="text" name="phone" placeholder="Enter your phone number" required>
                 </div>
-                <div class="form-field">
-                    <label for="location">Your Location</label>
-                    <input id="location" type="text" name="location" placeholder="Click on the map to select your location" required readonly>
+                <div>
+                    <label for="location">Origin Address:</label>
+                    <input type="text" id="location" placeholder="Enter origin address">
+                    <button id="set-origin-btn">Set Origin</button>
                 </div>
-                <div class="form-field">
-                    <label for="destination">Destination</label>
-                    <input id="destination" type="text" name="destination" placeholder="Click on the map to select your destination" required readonly>
+                <div>
+                    <label for="destination">Destination Address:</label>
+                    <input type="text" id="destination" placeholder="Enter destination address">
+                    <button id="set-destination-btn">Set Destination</button>
                 </div>
                 <div class="form-field">
                     <p id="distance-time"></p>
