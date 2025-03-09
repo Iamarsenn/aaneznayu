@@ -38,6 +38,7 @@ async function getCoordinatesFromAddress(address) {
         const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
         const data = await response.json();
         if (data.length > 0) {
+            console.log("Geocoding result:", data[0]); // Debugging
             return {
                 lat: parseFloat(data[0].lat),
                 lon: parseFloat(data[0].lon)
@@ -53,6 +54,7 @@ async function getCoordinatesFromAddress(address) {
 
 // Function to set origin
 async function setOrigin(lat, lng) {
+    console.log("Setting origin:", lat, lng); // Debugging
     originCoords = [lat, lng];
     const originAddress = await getAddressFromCoordinates(lat, lng);
     document.getElementById("location").value = originAddress;
@@ -61,6 +63,7 @@ async function setOrigin(lat, lng) {
 
 // Function to set destination
 async function setDestination(lat, lng) {
+    console.log("Setting destination:", lat, lng); // Debugging
     destinationCoords = [lat, lng];
     const destinationAddress = await getAddressFromCoordinates(lat, lng);
     document.getElementById("destination").value = destinationAddress;
@@ -88,6 +91,8 @@ map.on('click', async (e) => {
 
 // Function to update the map with markers
 function updateMap() {
+    console.log("Updating map..."); // Debugging
+
     // Clear existing markers and layers
     map.eachLayer((layer) => {
         if (layer instanceof L.Marker || layer instanceof L.Polyline) {
@@ -97,11 +102,13 @@ function updateMap() {
 
     // Add markers for origin and destination
     if (originCoords) {
+        console.log("Adding origin marker:", originCoords); // Debugging
         L.marker([originCoords[0], originCoords[1]]).addTo(map)
             .bindPopup("Origin: " + document.getElementById("location").value)
             .openPopup();
     }
     if (destinationCoords) {
+        console.log("Adding destination marker:", destinationCoords); // Debugging
         L.marker([destinationCoords[0], destinationCoords[1]]).addTo(map)
             .bindPopup("Destination: " + document.getElementById("destination").value)
             .openPopup();
@@ -109,6 +116,7 @@ function updateMap() {
 
     // Add a polyline to connect the two points
     if (originCoords && destinationCoords) {
+        console.log("Adding polyline between origin and destination"); // Debugging
         L.polyline([
             [originCoords[0], originCoords[1]],
             [destinationCoords[0], destinationCoords[1]]
@@ -174,6 +182,7 @@ function estimateTravelTime(distanceKm, averageSpeedKmh = 50) {
 
 // Event listener for setting origin from address input
 document.getElementById('set-origin-btn').addEventListener('click', async () => {
+    console.log("Set Origin button clicked"); // Debugging
     const address = document.getElementById('location').value;
     if (address) {
         const coords = await getCoordinatesFromAddress(address);
@@ -187,6 +196,7 @@ document.getElementById('set-origin-btn').addEventListener('click', async () => 
 
 // Event listener for setting destination from address input
 document.getElementById('set-destination-btn').addEventListener('click', async () => {
+    console.log("Set Destination button clicked"); // Debugging
     const address = document.getElementById('destination').value;
     if (address) {
         const coords = await getCoordinatesFromAddress(address);
