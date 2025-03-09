@@ -51,36 +51,39 @@ async function getCoordinatesFromAddress(address) {
     }
 }
 
+// Function to set origin
+async function setOrigin(lat, lng) {
+    originCoords = [lat, lng];
+    const originAddress = await getAddressFromCoordinates(lat, lng);
+    document.getElementById("location").value = originAddress;
+    updateMap();
+}
+
+// Function to set destination
+async function setDestination(lat, lng) {
+    destinationCoords = [lat, lng];
+    const destinationAddress = await getAddressFromCoordinates(lat, lng);
+    document.getElementById("destination").value = destinationAddress;
+    updateMap();
+    calculateTimeAndDistance();
+}
+
 // Function to handle map clicks
 map.on('click', async (e) => {
     const { lat, lng } = e.latlng;
 
     if (!originCoords) {
-        // Set origin
-        originCoords = [lat, lng];
-        const originAddress = await getAddressFromCoordinates(lat, lng);
-        document.getElementById("location").value = originAddress;
+        await setOrigin(lat, lng);
     } else if (!destinationCoords) {
-        // Set destination
-        destinationCoords = [lat, lng];
-        const destinationAddress = await getAddressFromCoordinates(lat, lng);
-        document.getElementById("destination").value = destinationAddress;
-
-        // Calculate distance and time
-        calculateTimeAndDistance();
+        await setDestination(lat, lng);
     } else {
         // Reset if both origin and destination are already set
-        originCoords = [lat, lng];
-        const originAddress = await getAddressFromCoordinates(lat, lng);
-        document.getElementById("location").value = originAddress;
+        await setOrigin(lat, lng);
         destinationCoords = null;
         document.getElementById("destination").value = "";
         document.getElementById("distance-time").innerHTML = "";
         document.getElementById("submit-btn").disabled = true;
     }
-
-    // Update the map with markers
-    updateMap();
 });
 
 // Function to update the map with markers
@@ -175,8 +178,7 @@ document.getElementById('set-origin-btn').addEventListener('click', async () => 
     if (address) {
         const coords = await getCoordinatesFromAddress(address);
         if (coords) {
-            originCoords = [coords.lat, coords.lon];
-            updateMap();
+            await setOrigin(coords.lat, coords.lon);
         } else {
             alert("Address not found. Please try again.");
         }
@@ -189,9 +191,7 @@ document.getElementById('set-destination-btn').addEventListener('click', async (
     if (address) {
         const coords = await getCoordinatesFromAddress(address);
         if (coords) {
-            destinationCoords = [coords.lat, coords.lon];
-            updateMap();
-            calculateTimeAndDistance();
+            await setDestination(coords.lat, coords.lon);
         } else {
             alert("Address not found. Please try again.");
         }
