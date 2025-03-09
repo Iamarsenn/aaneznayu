@@ -32,6 +32,25 @@ async function getAddressFromCoordinates(lat, lon) {
     }
 }
 
+// Function to geocode an address into coordinates
+async function getCoordinatesFromAddress(address) {
+    try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+        const data = await response.json();
+        if (data.length > 0) {
+            return {
+                lat: parseFloat(data[0].lat),
+                lon: parseFloat(data[0].lon)
+            };
+        } else {
+            throw new Error("Address not found");
+        }
+    } catch (error) {
+        console.error("Error geocoding address:", error);
+        return null;
+    }
+}
+
 // Function to handle map clicks
 map.on('click', async (e) => {
     const { lat, lng } = e.latlng;
@@ -150,35 +169,33 @@ function estimateTravelTime(distanceKm, averageSpeedKmh = 50) {
     return Math.ceil(timeMinutes); // Round up to the nearest minute
 }
 
-// Function to generate time options for the pickup time dropdown
-function generateTimeOptions() {
-    const pickupTimeSelect = document.getElementById('pickup-time');
-    pickupTimeSelect.innerHTML = '<option value="" disabled selected>Select a time</option>'; // Reset options
-
-    let startTime = new Date();
-    startTime.setHours(0, 0, 0, 0); // Start at midnight
-
-    for (let i = 0; i < 96; i++) { // 96 intervals of 15 min in 24 hours
-        const timeString = startTime.toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
-        });
-
-        const option = document.createElement('option');
-        option.value = timeString;
-        option.textContent = timeString;
-        pickupTimeSelect.appendChild(option);
-
-        startTime.setMinutes(startTime.getMinutes() + 15); // Increment by 15 minutes
+// Event listener for setting origin from address input
+document.getElementById('set-origin-btn').addEventListener('click', async () => {
+    const address = document.getElementById('location').value;
+    if (address) {
+        const coords = await getCoordinatesFromAddress(address);
+        if (coords) {
+            originCoords = [coords.lat, coords.lon];
+            updateMap();
+        } else {
+            alert("Address not found. Please try again.");
+        }
     }
-}
+});
 
-// Event listener for the calculate button
-document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(function () {
-        map.invalidateSize(); // Force Leaflet to recalculate size
-    }, 500);
+// Event listener for setting destination from address input
+document.getElementById('set-destination-btn').addEventListener('click', async () => {
+    const address = document.getElementById('destination').value;
+    if (address) {
+        const coords = await getCoordinatesFromAddress(address);
+        if (coords) {
+            destinationCoords = [coords.lat, coords.lon];
+            updateMap();
+            calculateTimeAndDistance();
+        } else {
+            alert("Address not found. Please try again.");
+        }
+    }
 });
 function generateTimeOptions() {
     console.log("Generating time options..."); // Debugging line
