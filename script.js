@@ -4,18 +4,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-// Recalculate map size on window resize
-window.addEventListener('resize', function () {
-    map.invalidateSize();
-});
-
-// Recalculate map size after the page loads (for mobile)
-document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(function () {
-        map.invalidateSize();
-    }, 100); // Small delay to ensure the container is fully rendered
-});
-
 // Variables to store origin and destination coordinates
 let originCoords = null;
 let destinationCoords = null;
@@ -74,6 +62,7 @@ async function setDestination(lat, lng) {
 // Function to handle map clicks
 map.on('click', async (e) => {
     const { lat, lng } = e.latlng;
+    console.log("Map clicked at:", lat, lng); // Debugging
 
     if (!originCoords) {
         await setOrigin(lat, lng);
@@ -103,13 +92,13 @@ function updateMap() {
     // Add markers for origin and destination
     if (originCoords) {
         console.log("Adding origin marker:", originCoords); // Debugging
-        L.marker([originCoords[0], originCoords[1]]).addTo(map)
+        L.marker(originCoords).addTo(map)
             .bindPopup("Origin: " + document.getElementById("location").value)
             .openPopup();
     }
     if (destinationCoords) {
         console.log("Adding destination marker:", destinationCoords); // Debugging
-        L.marker([destinationCoords[0], destinationCoords[1]]).addTo(map)
+        L.marker(destinationCoords).addTo(map)
             .bindPopup("Destination: " + document.getElementById("destination").value)
             .openPopup();
     }
@@ -117,19 +106,16 @@ function updateMap() {
     // Add a polyline to connect the two points
     if (originCoords && destinationCoords) {
         console.log("Adding polyline between origin and destination"); // Debugging
-        L.polyline([
-            [originCoords[0], originCoords[1]],
-            [destinationCoords[0], destinationCoords[1]]
-        ], { color: 'blue' }).addTo(map);
+        L.polyline([originCoords, destinationCoords], { color: 'blue' }).addTo(map);
 
         // Fit the map to show both markers
-        const bounds = L.latLngBounds([originCoords[0], originCoords[1]], [destinationCoords[0], destinationCoords[1]]);
+        const bounds = L.latLngBounds([originCoords, destinationCoords]);
         map.fitBounds(bounds);
     }
 }
 
 // Function to calculate distance and time
-async function calculateTimeAndDistance() {
+function calculateTimeAndDistance() {
     const output = document.getElementById("distance-time");
     const submitButton = document.getElementById("submit-btn");
 
